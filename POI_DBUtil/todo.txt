@@ -1,0 +1,20 @@
+済 //////////////////////////////////////////
+
+ファイルの種類によってフォルダ分け
+>OK
+
+iPh用Dto, DBMgr用メソッド(insert,update,delete,findAll,findByPk)
+>OK
+
+GAE model, 初期データ登録クラス (Model 内メソッド) に対応
+>OK
+
+API(Jersey)Resource対応
+>OK
+
+
+TODO ///////////////////////////////////////////
+
+Objective-C用 APIクライアント, parser
+
+Objective-C 用 updateOrInsert メソッドを追加
