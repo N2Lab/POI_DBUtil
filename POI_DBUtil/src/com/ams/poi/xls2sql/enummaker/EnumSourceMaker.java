@@ -15,7 +15,7 @@ import com.ams.poi.xls2sql.util.NameUtil;
 
 /**
  * <p>
- * プロジェクト名: POI_DBUtil
+ * プロジェクト名: POI_DBUtil.
  * </p>
  * <p>
  * タイトル: EnumSourceMaker
