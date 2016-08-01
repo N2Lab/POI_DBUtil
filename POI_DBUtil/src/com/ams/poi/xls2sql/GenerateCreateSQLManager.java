@@ -27,7 +27,7 @@ import com.ams.poi.xls2sql.util.FileUtil;
 
 /**
  * <p>タイトル: GenerateCreateSQLManager</p>
- * <p>説明: 
+ * <p>説明:
  * XLSファイルDBテーブル定義書を読み取り
  * Create SQL ファイルを出力する。<BR>
  * 後でフォーマットをpropertiesファイルで指定できるようにする。
@@ -51,10 +51,10 @@ public class GenerateCreateSQLManager {
 
 	// output dir
 	private String outDir = "";
-  
+
   // all create sql (with drop)
   private StringBuffer allCreateSQL = new StringBuffer();
-  
+
   // all create sql (no drop)
   private StringBuffer allCreateSQL_nodrop = new StringBuffer();
 
@@ -62,7 +62,7 @@ public class GenerateCreateSQLManager {
 
 	// テーブル定義SheetName (Table##)
 	private static final String TABLE_DEF_SHEETNAME = "Table";
-  
+
   // 全CreateSQL出力ファイル名 (DROP, CREATE)
   public static final String CREATE_ALL_SQL_FILE = "create_all.sql";
 
@@ -150,7 +150,7 @@ private static final String JAVA_JDO_DIR = File.separator + "java_jdo";
         System.out.println(" fail.");
       } finally {
       }
-      
+
       // 全SQLを出力(drop無)
       System.out.print("Export to " + CREATE_ALL_NODROP_SQL_FILE + "...");
       String output_file_nodrop = outDir + File.separator + CREATE_ALL_NODROP_SQL_FILE;
@@ -163,7 +163,7 @@ private static final String JAVA_JDO_DIR = File.separator + "java_jdo";
         System.out.println(" fail.");
       } finally {
       }
-      
+
       return crate_sql_num;
     }
 	/**
@@ -171,7 +171,7 @@ private static final String JAVA_JDO_DIR = File.separator + "java_jdo";
 	 * 引数のシートからテーブルを取得しCreateSQLファイルを作成。<BR>
 	 * 1シートに複数のテーブル定義が記述されているとする。
 	 * @param sheet テーブル定義が記述されているシート
-     * @param dbms DBMS 
+     * @param dbms DBMS
 	 * @return 作成したSQLファイル数
 	 * @throws Exception
 	 */
@@ -184,10 +184,10 @@ private static final String JAVA_JDO_DIR = File.separator + "java_jdo";
 
 		CreateSQLFactory factory = new CreateSQLFactory();
 		CreateSQL create_sql = factory.getCreateSQL(dbms);
-		
-		// Objective C DBMgr manager 
+
+		// Objective C DBMgr manager
 		ObjectiveCDBMgrMaker oc_dbmgr = new ObjectiveCDBMgrMaker();
-		
+
 		// create_all.sql prefix を追加
 		allCreateSQL.append(create_sql.getCreateTableHeader());
 		allCreateSQL_nodrop.append(create_sql.getCreateTableHeader());
@@ -268,17 +268,21 @@ private static final String JAVA_JDO_DIR = File.separator + "java_jdo";
 
 				////// 出力2 Java Model  ///////////////
 				outputForJava(output_sql_encode, td);
-				
+
 				////// 出力3 Objective-C  ///////////////
-				outputForObjectiveC(output_sql_encode, td, oc_dbmgr);
-				
+				try {
+					outputForObjectiveC(output_sql_encode, td, oc_dbmgr);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+
 				////// 出力4 JDO (for Google App Engine) ///////////
 				outputForJdo(output_sql_encode, td);
-				
+
 			}
 			r++;
 		}
-		
+
 		// Objective-C DBMgrを出力
 		oc_dbmgr.onEndFile();
 		try {
@@ -288,7 +292,7 @@ private static final String JAVA_JDO_DIR = File.separator + "java_jdo";
 			String source = oc_dbmgr.getClassSource();
 			String sfile = outDir + OBJECTIVE_C_DIR +  File.separator
 					+ "DBMgr.m";
-			
+
 			FileUtil.writeFile(sfile, source, output_sql_encode);
 			FileUtil.writeFile(hfile, header, output_sql_encode);
 			System.out.println(" Objective-C DBMgr output ok.");
@@ -327,26 +331,26 @@ private static final String JAVA_JDO_DIR = File.separator + "java_jdo";
 	/**
 	 * @param output_sql_encode
 	 * @param td
-	 * @param oc_dbmgr 
+	 * @param oc_dbmgr
 	 */
 	private void outputForObjectiveC(String output_sql_encode, TableDef td, ObjectiveCDBMgrMaker oc_dbmgr) {
 		// 3.1 Objective-C Model
 		{
 		ObjectiveCModelMaker bs = new ObjectiveCModelMaker();
-		
+
 		String source = bs.getModelClassSource(td);
 		String sfile = outDir + OBJECTIVE_C_DIR +  File.separator
 				+ td.getTableNamePhysicsTopUpper() + ".m";
-		
+
 		String header = bs.getModelClassHearder(td);
 		String hfile = outDir + OBJECTIVE_C_DIR +  File.separator
 				+ td.getTableNamePhysicsTopUpper() + ".h";
-		
+
 		// 3.2 Objective-C DBMgr
 		// TODO xxxById, findXxxAll, findXxx (2つ目の項目,コメント出力), create, insert, update
 		// Table td の定義に基づいて各メソッドのソースを内部に出力
 		oc_dbmgr.addTableDef(td);
-		
+
 		try {
 			FileUtil.writeFile(sfile, source, output_sql_encode);
 			FileUtil.writeFile(hfile, header, output_sql_encode);
@@ -396,7 +400,7 @@ private static final String JAVA_JDO_DIR = File.separator + "java_jdo";
 	 * getTableDefFromSheet<BR>
 	 * シートの指定行からテーブル定義を取得。<BR>
 	 * かなりシートの仕様書に依存している
-	 * 
+	 *
 	 * @param sheet シート
 	 * @param table_row_top 先頭行(テーブル名行)
 	 * @param table_row_bottom 最終行
@@ -412,7 +416,7 @@ private static final String JAVA_JDO_DIR = File.separator + "java_jdo";
 		short strage_engine_col = 2; // MySQL
 		short character_set_col = 3; // MySQL
 		short row_format_col = 4; // MySQL
-		
+
 		short koumoku = 1;
 		short field_name = 2;
 		short type = 3;
@@ -441,12 +445,12 @@ private static final String JAVA_JDO_DIR = File.separator + "java_jdo";
 			}
 			td.setTableNameLogic(org_text.substring(n1 + 1, n2));
 			td.setTableNamePhysics(org_text.substring(n2 + 1, n3));
-			
+
 			// ストーレジエンジン名(for MySQL)
 			if (row.getCell(strage_engine_col) != null) {
 			    td.setStrageEngineName(row.getCell(strage_engine_col).getStringCellValue());
 			}
-			
+
 			// キャラクタセット(for MySQL)
 			if (row.getCell(character_set_col) != null) {
 				td.setCharacterSetName(row.getCell(character_set_col).getStringCellValue());
@@ -462,9 +466,9 @@ private static final String JAVA_JDO_DIR = File.separator + "java_jdo";
 		for (int r = table_row_top + 2; r <= table_row_bottom; r++) {
 			FieldDef fd = new FieldDef();
 			HSSFRow row = sheet.getRow(r);
-			
+
 			fd.setFieldNameLogic(row.getCell(koumoku).getStringCellValue());
-			
+
 			// 論理名がnullか""の場合は読み込み中止
 			if (fd.getFieldNameLogic() == null || "".equals(fd.getFieldNameLogic())) {
 			    break;
@@ -475,11 +479,11 @@ private static final String JAVA_JDO_DIR = File.separator + "java_jdo";
 			fd.setFieldNamePhysics(field_name_txt);
 			fd.setTypeXls(
 				StringUtils.trim(row.getCell(type).getStringCellValue()));
-				
+
 			String pkey =
 				StringUtils.trim(row.getCell(is_pkey).getStringCellValue());
 			fd.setPrimaryKey(!(pkey == null || pkey.length() == 0));
-			
+
 			String not_null =
 				StringUtils.trim(row.getCell(is_null).getStringCellValue());
 			fd.setNotNull(!(not_null == null || not_null.length() == 0));
@@ -501,8 +505,8 @@ private static final String JAVA_JDO_DIR = File.separator + "java_jdo";
 
 				case HSSFCell.CELL_TYPE_NUMERIC :
 					double def_num = row.getCell(default_val).getNumericCellValue();
-					fd.setDefaultValue(Double.toString(def_num));			
-					
+					fd.setDefaultValue(Double.toString(def_num));
+
 					break;
 
 				default :
@@ -528,19 +532,19 @@ private static final String JAVA_JDO_DIR = File.separator + "java_jdo";
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-	      
+
 	      if (row.getCell(index_length).getCellType() == HSSFCell.CELL_TYPE_NUMERIC) {
 	        fd.setIndexLength((int)row.getCell(index_length).getNumericCellValue());
 	      }
 			}
-      
+
       // note (備考)
       {
       	HSSFCell note_cell = row.getCell(note);
       	if (note_cell != null && note_cell.getCellType() == HSSFCell.CELL_TYPE_STRING) {
       		fd.setNote(
       				StringUtils.trim(row.getCell(note).getStringCellValue()));
-      		
+
       	}
       }
 
