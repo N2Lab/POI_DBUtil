@@ -16,7 +16,7 @@ import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import com.ams.poi.xls2sql.bean.TableDef;
 import com.ams.poi.xls2sql.bean.TableValuesDef;
 import com.ams.poi.xls2sql.jerseymaker.WebAPIMethod;
-import com.ams.poi.xls2sql.rails.RailsModelSourceMaker;
+import com.ams.poi.xls2sql.realmswift.RealmSwiftModelMaker;
 import com.ams.poi.xls2sql.sqlfactory.DbmsType;
 import com.ams.poi.xls2sql.util.FileUtil;
 import com.ams.poi.xls2sql.util.NameUtil;
@@ -25,10 +25,10 @@ import com.ams.poi.xls2sql.util.Path;
 
 /**
  * <p>
- * タイトル: GenerateRailsModelManager
+ * タイトル: GenerateRealmSwiftModelManager
  * </p>
  * <p>
- * 説明: XLSファイルDBテーブル定義書を読み取り Rails Modelクラスを生成する<BR>
+ * 説明: XLSファイルDBテーブル定義書を読み取り RealmSwift Modelクラスを生成する<BR>
  * </p>
  * <p>
  * 著作権: Copyright (c) 2009 PowerBEANS Inc
@@ -43,7 +43,7 @@ import com.ams.poi.xls2sql.util.Path;
  * @author 門田明彦
  * @version 1.0
  */
-public class GenerateRailsModelManager {
+public class GenerateRealmSwiftModelManager {
 
 	// Create POIFS
 	private POIFSFileSystem fs;
@@ -83,7 +83,7 @@ public class GenerateRailsModelManager {
 	 * @param encode
 	 *            出力文字コード
 	 */
-	public GenerateRailsModelManager(String xls_file, String out_dir)
+	public GenerateRealmSwiftModelManager(String xls_file, String out_dir)
 			throws FileNotFoundException, IOException {
 
 		// Create POIFS
@@ -98,7 +98,7 @@ public class GenerateRailsModelManager {
 	/**
 	 * コンストラクタ
 	 */
-	private GenerateRailsModelManager() {
+	private GenerateRealmSwiftModelManager() {
 		super();
 	}
 
@@ -221,19 +221,20 @@ public class GenerateRailsModelManager {
 
 				{ // 2. Resource を出力
 					String class_name = NameUtil.toRailsModel(m.getTableNamePhysics());
-					final String filename = class_name + ".rb";
-					System.out.print("Export Rails Model to "
+					final String filename = class_name + ".swift";
+					System.out.print("Export RealmSwift Model to "
 							+ filename + " ...");
-					RailsModelSourceMaker maker = new RailsModelSourceMaker();
-					String source = maker.getSource(m, td);
+					RealmSwiftModelMaker maker = new RealmSwiftModelMaker();
+//					RailsModelSourceMaker maker = new RailsModelSourceMaker();
+					String source = maker.getModelClassSource(td);
 					String sfile = outDir + File.separator
-							+ Path.RAILS_MODEL + File.separator + filename;
+							+ Path.REALM_SWIFT_MODEL + File.separator + filename;
 					try {
 						FileUtil.writeFile(sfile, source, output_java_encode);
 						System.out.println("ok." + sfile);
 						sql_num++;
 					} catch (Exception e) {
-						System.out.println(" rails model output fail."
+						System.out.println(" RealmSwift model output fail."
 								+ e.getMessage());
 					}
 

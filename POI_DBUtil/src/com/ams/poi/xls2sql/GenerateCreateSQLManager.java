@@ -20,6 +20,7 @@ import com.ams.poi.xls2sql.beanmaker.BeanSourceMaker;
 import com.ams.poi.xls2sql.jdomaker.JDOSourceMaker;
 import com.ams.poi.xls2sql.objectivec.ObjectiveCDBMgrMaker;
 import com.ams.poi.xls2sql.objectivec.ObjectiveCModelMaker;
+import com.ams.poi.xls2sql.realmswift.RealmSwiftDBMgrMaker;
 import com.ams.poi.xls2sql.sqlfactory.CreateSQL;
 import com.ams.poi.xls2sql.sqlfactory.CreateSQLFactory;
 import com.ams.poi.xls2sql.sqlfactory.DbmsType;
@@ -187,6 +188,8 @@ private static final String JAVA_JDO_DIR = File.separator + "java_jdo";
 		
 		// Objective C DBMgr manager 
 		ObjectiveCDBMgrMaker oc_dbmgr = new ObjectiveCDBMgrMaker();
+		// RealmSwift maker 
+		RealmSwiftDBMgrMaker rs_maker = new RealmSwiftDBMgrMaker();
 		
 		// create_all.sql prefix Çí«â¡
 		allCreateSQL.append(create_sql.getCreateTableHeader());
@@ -274,7 +277,11 @@ private static final String JAVA_JDO_DIR = File.separator + "java_jdo";
 				
 				////// èoóÕ4 JDO (for Google App Engine) ///////////
 				outputForJdo(output_sql_encode, td);
+
+				////// èoóÕ5 RealmSwift  ///////////////
+//				outputForRealmSwift(output_sql_encode, td, r);
 				
+
 			}
 			r++;
 		}

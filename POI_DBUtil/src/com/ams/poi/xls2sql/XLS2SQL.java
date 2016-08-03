@@ -3,6 +3,7 @@ package com.ams.poi.xls2sql;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import com.ams.poi.xls2sql.realmswift.RealmSwiftDBMgrMaker;
 import com.ams.poi.xls2sql.sqlfactory.DbmsType;
 import com.ams.poi.xls2sql.util.Path;
 import com.ams.poi.xls2sql.util.StaticFileUtil;
@@ -133,6 +134,14 @@ public class XLS2SQL {
 		// generate Rails Model files -----------
 		generateRailsModels(xls_file, out_dir, dbms, output_sql_encode,
 				output_java_encode, output_jsp_encode, set_char_set);
+
+		// generate RealmSwift Model files -----------
+		generateRealmSwiftModels(xls_file, out_dir, dbms, output_sql_encode,
+				output_java_encode, output_jsp_encode, set_char_set);
+
+		// generate RealmSwift initial data insert proc file -----------
+//		generateRealmSwiftInserts(xls_file, out_dir, dbms, output_sql_encode,
+//				output_java_encode, output_jsp_encode, set_char_set);
 
 	}
 
@@ -308,6 +317,105 @@ public class XLS2SQL {
 		System.out.println("Rails Model ファイルを " + num3 + "ファイル出力しました。");
 		}
 	}
+	/**
+	 * output realmswift model files
+	 * @param xls_file
+	 * @param out_dir
+	 * @param dbms
+	 * @param output_sql_encode
+	 * @param output_java_encode
+	 * @param output_jsp_encode
+	 * @param set_char_set
+	 * @throws Exception
+	 */
+	private static void generateRealmSwiftModels(String xls_file, String out_dir,
+			DbmsType dbms, String output_sql_encode, String output_java_encode,
+			String output_jsp_encode, String set_char_set) throws Exception {
+		{
+		int num3 = 0;
+		try {
+			GenerateRealmSwiftModelManager imgr = new GenerateRealmSwiftModelManager(xls_file, out_dir);
+			
+//			imgr.setOption("set_char_set", set_char_set);
+			num3 = imgr.generate(dbms, output_sql_encode,
+					output_java_encode, output_jsp_encode);
+			
+			if (num3 > 0) {
+//				// 1件以上出力したら固定ソースクラスを出力
+//				StaticFileUtil.output("resource/java/POQLManagerFactory.java", out_dir + "/" + Path.JAVA_API_RESOURCE + "/POQLManagerFactory.java" , output_java_encode);
+//				StaticFileUtil.output("resource/java/poql.properties", out_dir + "/" + Path.JAVA_API_RESOURCE + "/poql.properties" , output_java_encode);
+				
+			}
+			
+			// 続いて初期データメーカーを作成
+//			GenerateRealmSwiftInitialManager maker = new GenerateRealmSwiftInitialManager(xls_file, out_dir);
+//			int export_insert_file = maker.generateInsertSQL(dbms, output_sql_encode, output_java_encode);
+			
+		} catch (FileNotFoundException e) {
+			System.err.println("ファイル:" + xls_file + " の読み取りエラー\n"
+					+ e.getMessage());
+			printUsage();
+			return;
+		} catch (IOException e) {
+			System.err.println("ファイル:" + xls_file + " のI/Oエラー\n"
+					+ e.getMessage());
+			printUsage();
+			return;
+		}
+
+		System.out.println("RealmSwift Model ファイルを " + num3 + "ファイル出力しました。");
+		}
+	}	
+	
+//	/**
+//	 * output realmswift insert files
+//	 * @param xls_file
+//	 * @param out_dir
+//	 * @param dbms
+//	 * @param output_sql_encode
+//	 * @param output_java_encode
+//	 * @param output_jsp_encode
+//	 * @param set_char_set
+//	 * @throws Exception
+//	 */
+//	private static void generateRealmSwiftInserts(String xls_file, String out_dir,
+//			DbmsType dbms, String output_sql_encode, String output_java_encode,
+//			String output_jsp_encode, String set_char_set) throws Exception {
+//		{
+//		int num3 = 0;
+//		try {
+//			RealmSwiftDBMgrMaker maker = new RealmSwiftDBMgrMaker();
+//			
+//			maker.getClassSource();
+//			
+////			GenerateRealmSwiftModelManager imgr = new GenerateRealmSwiftModelManager(xls_file, out_dir);
+//			
+////			imgr.setOption("set_char_set", set_char_set);
+//			num3 = imgr.generate(dbms, output_sql_encode,
+//					output_java_encode, output_jsp_encode);
+//			
+//			if (num3 > 0) {
+////				// 1件以上出力したら固定ソースクラスを出力
+////				StaticFileUtil.output("resource/java/POQLManagerFactory.java", out_dir + "/" + Path.JAVA_API_RESOURCE + "/POQLManagerFactory.java" , output_java_encode);
+////				StaticFileUtil.output("resource/java/poql.properties", out_dir + "/" + Path.JAVA_API_RESOURCE + "/poql.properties" , output_java_encode);
+//				
+//			}
+//		} catch (FileNotFoundException e) {
+//			System.err.println("ファイル:" + xls_file + " の読み取りエラー\n"
+//					+ e.getMessage());
+//			printUsage();
+//			return;
+//		} catch (IOException e) {
+//			System.err.println("ファイル:" + xls_file + " のI/Oエラー\n"
+//					+ e.getMessage());
+//			printUsage();
+//			return;
+//		}
+//
+//		System.out.println("RealmSwift Model ファイルを " + num3 + "ファイル出力しました。");
+//		}
+//	}	
+	
 		
 	/**
    * printUsage<BR>

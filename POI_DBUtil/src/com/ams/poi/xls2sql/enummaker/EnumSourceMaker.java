@@ -18,7 +18,7 @@ import com.ams.poi.xls2sql.util.NameUtil;
  * プロジェクト名: POI_DBUtil
  * </p>
  * <p>
- * タイトル: EnumSourceMaker..
+ * タイトル: EnumSourceMaker
  * </p>
  * <p>
  * 説明: TableDef から Java Enum ソースコードを生成するクラス。

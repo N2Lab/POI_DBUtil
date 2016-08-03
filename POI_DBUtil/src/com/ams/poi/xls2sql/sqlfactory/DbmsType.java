@@ -11,16 +11,8 @@ package com.ams.poi.xls2sql.sqlfactory;
  */
 public enum DbmsType {
 
-	ORACLE("oracle"), MYSQL("mysql"), DB2("db2"), SQLITE3("sqlite3");
-//	/** Oracle */
-//	
-//	public static final DbmsType ORACLE = new DbmsType("oracle");
-//	
-//	/** MySQL */
-//	public static final String MYSQL = "mysql";
-//
-//	/** DB2 */
-//    public static final Object DB2 = "db2";
+	ORACLE("oracle"), MYSQL("mysql"), DB2("db2"), SQLITE3("sqlite3"), 
+	REALMSWIFT("realmswift");
 
 	private String typename; 
 
