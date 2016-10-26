@@ -102,7 +102,7 @@ public class MYSQLCreateSQL implements CreateSQL {
 			if (td.getStrageEngineName() != null && td.getStrageEngineName().length() > 0) {
 	      		// MROONGA_DISABLE=true ÇÃèÍçáÇÕInnoDBÇ…
 				String engine = td.getStrageEngineName();
-	      		if (System.getProperty("MROONGA_DISABLE") != null) {
+	      		if (System.getProperty("MROONGA_DISABLE") != null && !"MyISAM".equalsIgnoreCase(engine)) {
 	      			engine = "InnoDB";
 	      		}
 				
