@@ -4,19 +4,20 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import com.ams.poi.xls2sql.sqlfactory.DbmsType;
+import com.ams.poi.xls2sql.util.CommonUtil;
 import com.ams.poi.xls2sql.util.Path;
 import com.ams.poi.xls2sql.util.StaticFileUtil;
 
 /**
  * <p>タイトル: XLS2SQL</p>
  * <p>説明: XLS > SQL 出力メインクラス
- * 
- * Mroonga無効化モード (AWSなど) 
+ *
+ * Mroonga無効化モード (AWSなど)
  * "I:\DropBoxMondenpowerbeans\Dropbox\Work\opt\LINEビジネスコネクト\4.DB設計\【ビジコネ】テーブル設計_TableAllList.xls" I:\DropBoxMondenpowerbeans\Dropbox\Work\opt\LINEビジネスコネクト\4.DB設計\sql mysql UTF8 UTF8 utf8mb4 utf8 MROONGA_DISABLE
  *
  * Mroonga有効モード (IDCFなど)
  * "I:\DropBoxMondenpowerbeans\Dropbox\Work\opt\LINEビジネスコネクト\4.DB設計\【ビジコネ】テーブル設計_TableAllList.xls" I:\DropBoxMondenpowerbeans\Dropbox\Work\opt\LINEビジネスコネクト\4.DB設計\sql mysql UTF8 UTF8 utf8mb4 utf8  MYSQL_UTF8MB4_DISABLE
- * 
+ *
  * </p>
  * <p>Created on 2003/07/25</p>
  * @author 門田明彦
@@ -54,10 +55,10 @@ public class XLS2SQL {
 		if (args.length >= 7) {
 			output_jsp_encode = args[6];
 		}
-		
+
 		// set param to env
 		System.setProperty("dbms", dbms.name());
-		
+
 		for (String arg : args) {
 			System.setProperty(arg, arg);
 		}
@@ -117,15 +118,19 @@ public class XLS2SQL {
 		System.out.println("全 Insert SQL を "
 				+ GenerateInsertSQLManager.INSERT_ALL_SQL_FILE + " に出力しました。");
 		}
-		
-		// generate JAVA Enum files -----------
+
+  		if (CommonUtil.doCreateSqlFileOnly()) {
+  			return;
+  		}
+
+  		// generate JAVA Enum files -----------
 		generateJavaEnum(xls_file, out_dir, dbms, output_sql_encode,
 				output_java_encode, output_jsp_encode, set_char_set);
-		
+
 		// generate Jersey Resourse files -----------
 		generateJavaResource(xls_file, out_dir, dbms, output_sql_encode,
 				output_java_encode, output_jsp_encode, set_char_set);
-		
+
 		// generate CakePHP Model files -----------
 		generateCakePHPModels(xls_file, out_dir, dbms, output_sql_encode,
 				output_java_encode, output_jsp_encode, set_char_set);
@@ -173,7 +178,7 @@ public class XLS2SQL {
 		System.out.println("JAVA Enum ファイルを " + num3 + "ファイル出力しました。");
 		}
 	}
-	
+
 	/**
 	 * output JAVA JerseyResource
 	 * @param xls_file
@@ -196,12 +201,12 @@ public class XLS2SQL {
 			imgr.setOption("set_char_set", set_char_set);
 			num3 = imgr.generate(dbms, output_sql_encode,
 					output_java_encode, output_jsp_encode);
-			
+
 			if (num3 > 0) {
 				// 1件以上出力したら固定ソースクラスを出力
 				StaticFileUtil.output("resource/java/POQLManagerFactory.java", out_dir + "/" + Path.JAVA_API_RESOURCE + "/POQLManagerFactory.java" , output_java_encode);
 				StaticFileUtil.output("resource/java/poql.properties", out_dir + "/" + Path.JAVA_API_RESOURCE + "/poql.properties" , output_java_encode);
-				
+
 			}
 		} catch (FileNotFoundException e) {
 			System.err.println("ファイル:" + xls_file + " の読み取りエラー\n"
@@ -237,16 +242,16 @@ public class XLS2SQL {
 		int num3 = 0;
 		try {
 			GenerateCakePHPModelManager imgr = new GenerateCakePHPModelManager(xls_file, out_dir);
-			
+
 //			imgr.setOption("set_char_set", set_char_set);
 			num3 = imgr.generate(dbms, output_sql_encode,
 					output_java_encode, output_jsp_encode);
-			
+
 			if (num3 > 0) {
 //				// 1件以上出力したら固定ソースクラスを出力
 //				StaticFileUtil.output("resource/java/POQLManagerFactory.java", out_dir + "/" + Path.JAVA_API_RESOURCE + "/POQLManagerFactory.java" , output_java_encode);
 //				StaticFileUtil.output("resource/java/poql.properties", out_dir + "/" + Path.JAVA_API_RESOURCE + "/poql.properties" , output_java_encode);
-				
+
 			}
 		} catch (FileNotFoundException e) {
 			System.err.println("ファイル:" + xls_file + " の読み取りエラー\n"
@@ -282,16 +287,16 @@ public class XLS2SQL {
 		int num3 = 0;
 		try {
 			GenerateRailsModelManager imgr = new GenerateRailsModelManager(xls_file, out_dir);
-			
+
 //			imgr.setOption("set_char_set", set_char_set);
 			num3 = imgr.generate(dbms, output_sql_encode,
 					output_java_encode, output_jsp_encode);
-			
+
 			if (num3 > 0) {
 //				// 1件以上出力したら固定ソースクラスを出力
 //				StaticFileUtil.output("resource/java/POQLManagerFactory.java", out_dir + "/" + Path.JAVA_API_RESOURCE + "/POQLManagerFactory.java" , output_java_encode);
 //				StaticFileUtil.output("resource/java/poql.properties", out_dir + "/" + Path.JAVA_API_RESOURCE + "/poql.properties" , output_java_encode);
-				
+
 			}
 		} catch (FileNotFoundException e) {
 			System.err.println("ファイル:" + xls_file + " の読み取りエラー\n"
@@ -308,10 +313,10 @@ public class XLS2SQL {
 		System.out.println("Rails Model ファイルを " + num3 + "ファイル出力しました。");
 		}
 	}
-		
+
 	/**
    * printUsage<BR>
-   * 
+   *
    */
   public static void printUsage() {
     System.out.println("[usage]\njava -jar xls2sql.jar tableDef.xls outDir dbms(oracle|mysql|db2|sqlite3) outputSQLEncode outputJavaEncode [mysql charset] [outputJspEncode]");

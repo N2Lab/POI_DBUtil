@@ -23,6 +23,7 @@ import com.ams.poi.xls2sql.objectivec.ObjectiveCModelMaker;
 import com.ams.poi.xls2sql.sqlfactory.CreateSQL;
 import com.ams.poi.xls2sql.sqlfactory.CreateSQLFactory;
 import com.ams.poi.xls2sql.sqlfactory.DbmsType;
+import com.ams.poi.xls2sql.util.CommonUtil;
 import com.ams.poi.xls2sql.util.FileUtil;
 
 /**
@@ -266,41 +267,47 @@ private static final String JAVA_JDO_DIR = File.separator + "java_jdo";
 				// 全ファイルバッファ(Drop無し)に追加
 				allCreateSQL_nodrop.append(file_out_nodrop);
 
-				////// 出力2 Java Model  ///////////////
-				outputForJava(output_sql_encode, td);
+		  		if (!CommonUtil.doCreateSqlFileOnly()) {
 
-				////// 出力3 Objective-C  ///////////////
-				try {
-					outputForObjectiveC(output_sql_encode, td, oc_dbmgr);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+					////// 出力2 Java Model  ///////////////
+					outputForJava(output_sql_encode, td);
 
-				////// 出力4 JDO (for Google App Engine) ///////////
-				outputForJdo(output_sql_encode, td);
+					////// 出力3 Objective-C  ///////////////
+					try {
+						outputForObjectiveC(output_sql_encode, td, oc_dbmgr);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+
+					////// 出力4 JDO (for Google App Engine) ///////////
+					outputForJdo(output_sql_encode, td);
+
+		  		}
 
 			}
 			r++;
 		}
 
-		// Objective-C DBMgrを出力
-		oc_dbmgr.onEndFile();
-		try {
-			String header = oc_dbmgr.getHeaderSource();
-			String hfile = outDir + OBJECTIVE_C_DIR +  File.separator
-					+ "DBMgr.h";
-			String source = oc_dbmgr.getClassSource();
-			String sfile = outDir + OBJECTIVE_C_DIR +  File.separator
-					+ "DBMgr.m";
+  		if (!CommonUtil.doCreateSqlFileOnly()) {
+  			// Objective-C DBMgrを出力
+  			oc_dbmgr.onEndFile();
+  			try {
+  				String header = oc_dbmgr.getHeaderSource();
+  				String hfile = outDir + OBJECTIVE_C_DIR +  File.separator
+  						+ "DBMgr.h";
+  				String source = oc_dbmgr.getClassSource();
+  				String sfile = outDir + OBJECTIVE_C_DIR +  File.separator
+  						+ "DBMgr.m";
 
-			FileUtil.writeFile(sfile, source, output_sql_encode);
-			FileUtil.writeFile(hfile, header, output_sql_encode);
-			System.out.println(" Objective-C DBMgr output ok.");
+  				FileUtil.writeFile(sfile, source, output_sql_encode);
+  				FileUtil.writeFile(hfile, header, output_sql_encode);
+  				System.out.println(" Objective-C DBMgr output ok.");
 
-		} catch (IOException e) {
-			System.out.println(" Objective-C DBMgr output fail.");
-		} finally {
-		}
+  			} catch (IOException e) {
+  				System.out.println(" Objective-C DBMgr output fail.");
+  			} finally {
+  			}
+  		}
 
 		allCreateSQL.append(create_sql.getCreateTableFooter());
 		allCreateSQL_nodrop.append(create_sql.getCreateTableFooter());
