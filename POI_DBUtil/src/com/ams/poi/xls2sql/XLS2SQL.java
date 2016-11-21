@@ -9,18 +9,15 @@ import com.ams.poi.xls2sql.util.Path;
 import com.ams.poi.xls2sql.util.StaticFileUtil;
 
 /**
- * <p>ƒ^ƒCƒgƒ‹: XLS2SQL</p>
- * <p>à–¾: XLS > SQL o—ÍƒƒCƒ“ƒNƒ‰ƒX
+ * <p>ã‚¿ã‚¤ãƒˆãƒ«: XLS2SQL</p>
+ * <p>èª¬æ˜: XLS > SQL å‡ºåŠ›ãƒ¡ã‚¤ãƒ³ã‚¯ãƒ©ã‚¹
  *
- * Mroonga–³Œø‰»ƒ‚[ƒh (AWS‚È‚Ç)
- * "I:\DropBoxMondenpowerbeans\Dropbox\Work\opt\LINEƒrƒWƒlƒXƒRƒlƒNƒg\4.DBİŒv\yƒrƒWƒRƒlzƒe[ƒuƒ‹İŒv_TableAllList.xls" I:\DropBoxMondenpowerbeans\Dropbox\Work\opt\LINEƒrƒWƒlƒXƒRƒlƒNƒg\4.DBİŒv\sql mysql UTF8 UTF8 utf8mb4 utf8 MROONGA_DISABLE
- *
- * Mroonga—LŒøƒ‚[ƒh (IDCF‚È‚Ç)
- * "I:\DropBoxMondenpowerbeans\Dropbox\Work\opt\LINEƒrƒWƒlƒXƒRƒlƒNƒg\4.DBİŒv\yƒrƒWƒRƒlzƒe[ƒuƒ‹İŒv_TableAllList.xls" I:\DropBoxMondenpowerbeans\Dropbox\Work\opt\LINEƒrƒWƒlƒXƒRƒlƒNƒg\4.DBİŒv\sql mysql UTF8 UTF8 utf8mb4 utf8  MYSQL_UTF8MB4_DISABLE
+ * Mroongaç„¡åŠ¹åŒ–ãƒ¢ãƒ¼ãƒ‰ (AWSãªã©)
+ * TableAllList.xls ./sql mysql UTF8 UTF8 utf8mb4 utf8 MROONGA_DISABLE
  *
  * </p>
  * <p>Created on 2003/07/25</p>
- * @author –å“c–¾•F
+ * @author é–€ç”°æ˜å½¦
  * @version 1.0
  */
 public class XLS2SQL {
@@ -73,24 +70,24 @@ public class XLS2SQL {
 					output_java_encode);
 
 		} catch (FileNotFoundException e) {
-			System.err.println("ƒtƒ@ƒCƒ‹:" + xls_file + " ‚Ì“Ç‚İæ‚èƒGƒ‰[\n"
+			System.err.println("ãƒ•ã‚¡ã‚¤ãƒ«:" + xls_file + " ã®èª­ã¿å–ã‚Šã‚¨ãƒ©ãƒ¼\n"
 					+ e.getMessage());
 			printUsage();
 			return;
 		} catch (IOException e) {
-			System.err.println("ƒtƒ@ƒCƒ‹:" + xls_file + " ‚ÌI/OƒGƒ‰[\n"
+			System.err.println("ãƒ•ã‚¡ã‚¤ãƒ«:" + xls_file + " ã®I/Oã‚¨ãƒ©ãƒ¼\n"
 					+ e.getMessage());
 			printUsage();
 			return;
 		}
 
-		System.out.println("o—ÍƒfƒBƒŒƒNƒgƒŠ:" + out_dir);
-		System.out.println("Create SQL ƒtƒ@ƒCƒ‹‚ğ " + num + "ƒtƒ@ƒCƒ‹o—Í‚µ‚Ü‚µ‚½B");
-		System.out.println("‘S Create SQL ‚ğ "
-				+ GenerateCreateSQLManager.CREATE_ALL_SQL_FILE + " ‚Éo—Í‚µ‚Ü‚µ‚½B");
-		System.out.println("‘S Create SQL(DROP–³) ‚ğ "
+		System.out.println("å‡ºåŠ›ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª:" + out_dir);
+		System.out.println("Create SQL ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ " + num + "ãƒ•ã‚¡ã‚¤ãƒ«å‡ºåŠ›ã—ã¾ã—ãŸã€‚");
+		System.out.println("å…¨ Create SQL ã‚’ "
+				+ GenerateCreateSQLManager.CREATE_ALL_SQL_FILE + " ã«å‡ºåŠ›ã—ã¾ã—ãŸã€‚");
+		System.out.println("å…¨ Create SQL(DROPç„¡) ã‚’ "
 				+ GenerateCreateSQLManager.CREATE_ALL_NODROP_SQL_FILE
-				+ " ‚Éo—Í‚µ‚Ü‚µ‚½B");
+				+ " ã«å‡ºåŠ›ã—ã¾ã—ãŸã€‚");
 		}
 
 		// generate InsertSQL files -----------
@@ -103,20 +100,20 @@ public class XLS2SQL {
 			num2 = imgr.generateInsertSQL(dbms, output_sql_encode,
 					output_java_encode);
 		} catch (FileNotFoundException e) {
-			System.err.println("ƒtƒ@ƒCƒ‹:" + xls_file + " ‚Ì“Ç‚İæ‚èƒGƒ‰[\n"
+			System.err.println("ãƒ•ã‚¡ã‚¤ãƒ«:" + xls_file + " ã®èª­ã¿å–ã‚Šã‚¨ãƒ©ãƒ¼\n"
 					+ e.getMessage());
 			printUsage();
 			return;
 		} catch (IOException e) {
-			System.err.println("ƒtƒ@ƒCƒ‹:" + xls_file + " ‚ÌI/OƒGƒ‰[\n"
+			System.err.println("ãƒ•ã‚¡ã‚¤ãƒ«:" + xls_file + " ã®I/Oã‚¨ãƒ©ãƒ¼\n"
 					+ e.getMessage());
 			printUsage();
 			return;
 		}
 
-		System.out.println("Insert SQL ƒtƒ@ƒCƒ‹‚ğ " + num2 + "ƒtƒ@ƒCƒ‹o—Í‚µ‚Ü‚µ‚½B");
-		System.out.println("‘S Insert SQL ‚ğ "
-				+ GenerateInsertSQLManager.INSERT_ALL_SQL_FILE + " ‚Éo—Í‚µ‚Ü‚µ‚½B");
+		System.out.println("Insert SQL ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ " + num2 + "ãƒ•ã‚¡ã‚¤ãƒ«å‡ºåŠ›ã—ã¾ã—ãŸã€‚");
+		System.out.println("å…¨ Insert SQL ã‚’ "
+				+ GenerateInsertSQLManager.INSERT_ALL_SQL_FILE + " ã«å‡ºåŠ›ã—ã¾ã—ãŸã€‚");
 		}
 
   		if (CommonUtil.doCreateSqlFileOnly()) {
@@ -164,18 +161,18 @@ public class XLS2SQL {
 			num3 = imgr.generateEnums(dbms, output_sql_encode,
 					output_java_encode, output_jsp_encode);
 		} catch (FileNotFoundException e) {
-			System.err.println("ƒtƒ@ƒCƒ‹:" + xls_file + " ‚Ì“Ç‚İæ‚èƒGƒ‰[\n"
+			System.err.println("ãƒ•ã‚¡ã‚¤ãƒ«:" + xls_file + " ã®èª­ã¿å–ã‚Šã‚¨ãƒ©ãƒ¼\n"
 					+ e.getMessage());
 			printUsage();
 			return;
 		} catch (IOException e) {
-			System.err.println("ƒtƒ@ƒCƒ‹:" + xls_file + " ‚ÌI/OƒGƒ‰[\n"
+			System.err.println("ãƒ•ã‚¡ã‚¤ãƒ«:" + xls_file + " ã®I/Oã‚¨ãƒ©ãƒ¼\n"
 					+ e.getMessage());
 			printUsage();
 			return;
 		}
 
-		System.out.println("JAVA Enum ƒtƒ@ƒCƒ‹‚ğ " + num3 + "ƒtƒ@ƒCƒ‹o—Í‚µ‚Ü‚µ‚½B");
+		System.out.println("JAVA Enum ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ " + num3 + "ãƒ•ã‚¡ã‚¤ãƒ«å‡ºåŠ›ã—ã¾ã—ãŸã€‚");
 		}
 	}
 
@@ -203,24 +200,24 @@ public class XLS2SQL {
 					output_java_encode, output_jsp_encode);
 
 			if (num3 > 0) {
-				// 1ŒˆÈão—Í‚µ‚½‚çŒÅ’èƒ\[ƒXƒNƒ‰ƒX‚ğo—Í
+				// 1ä»¶ä»¥ä¸Šå‡ºåŠ›ã—ãŸã‚‰å›ºå®šã‚½ãƒ¼ã‚¹ã‚¯ãƒ©ã‚¹ã‚’å‡ºåŠ›
 				StaticFileUtil.output("resource/java/POQLManagerFactory.java", out_dir + "/" + Path.JAVA_API_RESOURCE + "/POQLManagerFactory.java" , output_java_encode);
 				StaticFileUtil.output("resource/java/poql.properties", out_dir + "/" + Path.JAVA_API_RESOURCE + "/poql.properties" , output_java_encode);
 
 			}
 		} catch (FileNotFoundException e) {
-			System.err.println("ƒtƒ@ƒCƒ‹:" + xls_file + " ‚Ì“Ç‚İæ‚èƒGƒ‰[\n"
+			System.err.println("ãƒ•ã‚¡ã‚¤ãƒ«:" + xls_file + " ã®èª­ã¿å–ã‚Šã‚¨ãƒ©ãƒ¼\n"
 					+ e.getMessage());
 			printUsage();
 			return;
 		} catch (IOException e) {
-			System.err.println("ƒtƒ@ƒCƒ‹:" + xls_file + " ‚ÌI/OƒGƒ‰[\n"
+			System.err.println("ãƒ•ã‚¡ã‚¤ãƒ«:" + xls_file + " ã®I/Oã‚¨ãƒ©ãƒ¼\n"
 					+ e.getMessage());
 			printUsage();
 			return;
 		}
 
-		System.out.println("JAVA WEBAPI Jersey Resource ƒtƒ@ƒCƒ‹‚ğ " + num3 + "ƒtƒ@ƒCƒ‹o—Í‚µ‚Ü‚µ‚½B");
+		System.out.println("JAVA WEBAPI Jersey Resource ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ " + num3 + "ãƒ•ã‚¡ã‚¤ãƒ«å‡ºåŠ›ã—ã¾ã—ãŸã€‚");
 		}
 	}
 
@@ -248,24 +245,24 @@ public class XLS2SQL {
 					output_java_encode, output_jsp_encode);
 
 			if (num3 > 0) {
-//				// 1ŒˆÈão—Í‚µ‚½‚çŒÅ’èƒ\[ƒXƒNƒ‰ƒX‚ğo—Í
+//				// 1ä»¶ä»¥ä¸Šå‡ºåŠ›ã—ãŸã‚‰å›ºå®šã‚½ãƒ¼ã‚¹ã‚¯ãƒ©ã‚¹ã‚’å‡ºåŠ›
 //				StaticFileUtil.output("resource/java/POQLManagerFactory.java", out_dir + "/" + Path.JAVA_API_RESOURCE + "/POQLManagerFactory.java" , output_java_encode);
 //				StaticFileUtil.output("resource/java/poql.properties", out_dir + "/" + Path.JAVA_API_RESOURCE + "/poql.properties" , output_java_encode);
 
 			}
 		} catch (FileNotFoundException e) {
-			System.err.println("ƒtƒ@ƒCƒ‹:" + xls_file + " ‚Ì“Ç‚İæ‚èƒGƒ‰[\n"
+			System.err.println("ãƒ•ã‚¡ã‚¤ãƒ«:" + xls_file + " ã®èª­ã¿å–ã‚Šã‚¨ãƒ©ãƒ¼\n"
 					+ e.getMessage());
 			printUsage();
 			return;
 		} catch (IOException e) {
-			System.err.println("ƒtƒ@ƒCƒ‹:" + xls_file + " ‚ÌI/OƒGƒ‰[\n"
+			System.err.println("ãƒ•ã‚¡ã‚¤ãƒ«:" + xls_file + " ã®I/Oã‚¨ãƒ©ãƒ¼\n"
 					+ e.getMessage());
 			printUsage();
 			return;
 		}
 
-		System.out.println("Cake PHP Model ƒtƒ@ƒCƒ‹‚ğ " + num3 + "ƒtƒ@ƒCƒ‹o—Í‚µ‚Ü‚µ‚½B");
+		System.out.println("Cake PHP Model ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ " + num3 + "ãƒ•ã‚¡ã‚¤ãƒ«å‡ºåŠ›ã—ã¾ã—ãŸã€‚");
 		}
 	}
 
@@ -293,24 +290,24 @@ public class XLS2SQL {
 					output_java_encode, output_jsp_encode);
 
 			if (num3 > 0) {
-//				// 1ŒˆÈão—Í‚µ‚½‚çŒÅ’èƒ\[ƒXƒNƒ‰ƒX‚ğo—Í
+//				// 1ä»¶ä»¥ä¸Šå‡ºåŠ›ã—ãŸã‚‰å›ºå®šã‚½ãƒ¼ã‚¹ã‚¯ãƒ©ã‚¹ã‚’å‡ºåŠ›
 //				StaticFileUtil.output("resource/java/POQLManagerFactory.java", out_dir + "/" + Path.JAVA_API_RESOURCE + "/POQLManagerFactory.java" , output_java_encode);
 //				StaticFileUtil.output("resource/java/poql.properties", out_dir + "/" + Path.JAVA_API_RESOURCE + "/poql.properties" , output_java_encode);
 
 			}
 		} catch (FileNotFoundException e) {
-			System.err.println("ƒtƒ@ƒCƒ‹:" + xls_file + " ‚Ì“Ç‚İæ‚èƒGƒ‰[\n"
+			System.err.println("ãƒ•ã‚¡ã‚¤ãƒ«:" + xls_file + " ã®èª­ã¿å–ã‚Šã‚¨ãƒ©ãƒ¼\n"
 					+ e.getMessage());
 			printUsage();
 			return;
 		} catch (IOException e) {
-			System.err.println("ƒtƒ@ƒCƒ‹:" + xls_file + " ‚ÌI/OƒGƒ‰[\n"
+			System.err.println("ãƒ•ã‚¡ã‚¤ãƒ«:" + xls_file + " ã®I/Oã‚¨ãƒ©ãƒ¼\n"
 					+ e.getMessage());
 			printUsage();
 			return;
 		}
 
-		System.out.println("Rails Model ƒtƒ@ƒCƒ‹‚ğ " + num3 + "ƒtƒ@ƒCƒ‹o—Í‚µ‚Ü‚µ‚½B");
+		System.out.println("Rails Model ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ " + num3 + "ãƒ•ã‚¡ã‚¤ãƒ«å‡ºåŠ›ã—ã¾ã—ãŸã€‚");
 		}
 	}
 
