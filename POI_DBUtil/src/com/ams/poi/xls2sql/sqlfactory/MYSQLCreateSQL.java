@@ -72,7 +72,7 @@ public class MYSQLCreateSQL implements CreateSQL {
 						defval = "" + (int)Double.parseDouble(defval);
 					}
 				}
-					
+
 				out.append("   DEFAULT " + defval);
 			}
 
@@ -105,8 +105,8 @@ public class MYSQLCreateSQL implements CreateSQL {
 	      		if (System.getProperty("MROONGA_DISABLE") != null && "mroonga".equalsIgnoreCase(engine)) {
 	      			engine = "InnoDB";
 	      		}
-				
-			    out.append(" ENGINE = " + engine);
+
+			    out.append(" ENGINE = " + engine.trim());
 			    cm = ",";
 			}
 			// table character set   ex)			, CHARACTER SET utf8mb4
@@ -137,7 +137,7 @@ public class MYSQLCreateSQL implements CreateSQL {
   			if (td.isDropTableEnable()) {
                 out.append("DROP TABLE IF EXISTS " + td.getTableNamePhysics() + ";\n");
   			}
-  
+
   			// DropIndex
   			if (td.isDropIndexEnable()) {
   				out.append("DROP INDEX " + pkey_name + ";\n\n");
@@ -163,13 +163,13 @@ public class MYSQLCreateSQL implements CreateSQL {
 	private String getIndex(TableDef td) {
 		StringBuffer buf = new StringBuffer("");
 		HashMap index_map = new HashMap();
-		
+
 		// インデックスのマップを作成してインデックスの数だけ
 		// CREATE INDEX を出力
 		for(Iterator it = td.getFieldList().iterator(); it.hasNext();) {
 			FieldDef fd = (FieldDef) it.next();
 			String index = fd.getIndexName();
-			
+
 			if (index != null && index.length() > 0) {
 				// カンマ区切りして格納
 				String[] indexs = index.split(",");
@@ -180,25 +180,25 @@ public class MYSQLCreateSQL implements CreateSQL {
 //        index_map.put(index, index);
 			}
 		}
-		
+
 		// 各インデックスを解析
 		for(Iterator it = index_map.keySet().iterator(); it.hasNext();) {
 			String index = (String)it.next();
       FieldDef itfd = (FieldDef)index_map.get(index);
 //      String index = itfd.getIndexName();
-      String unique = itfd.isIndexUnique() ? "UNIQUE" : 
-    	  index.startsWith("FULLTEXT") ? "FULLTEXT" : 
-    	  index.startsWith("SPATIAL") ? "SPATIAL" : 
+      String unique = itfd.isIndexUnique() ? "UNIQUE" :
+    	  index.startsWith("FULLTEXT") ? "FULLTEXT" :
+    	  index.startsWith("SPATIAL") ? "SPATIAL" :
     	  "";
-      
+
       		// FULLTEXT かつ MROONGA_DISABLE=true の場合は無視
       		if ("FULLTEXT".equals(unique) && System.getProperty("MROONGA_DISABLE") != null) {
       			continue;
       		}
-      
+
 			buf.append("CREATE " + unique +  " INDEX " +
 				index + " ON " + td.getTableNamePhysics() + " (\n\t");
-			
+
 			// 対応するフィールドを探して追加
 			int c = 0;
 			for(Iterator i2 = td.getFieldList().iterator(); i2.hasNext();) {
@@ -206,19 +206,19 @@ public class MYSQLCreateSQL implements CreateSQL {
 				if (fd.getIndexName() != null &&
 					fd.getIndexName().contains(index)) {
 					if (c++ > 0) {
-						buf.append(",");	
+						buf.append(",");
 					}
 					buf.append(fd.getFieldNamePhysics());
-          
+
           if (fd.getIndexLength() > 0) {
             buf.append("(" + fd.getIndexLength() + ")");
           }
-											
+
 				}
 			}
 			buf.append("\n);\n");
 		}
-		
+
 		return buf.toString();
 	}
 
@@ -245,7 +245,7 @@ public class MYSQLCreateSQL implements CreateSQL {
 	public String getCreateTableHeader() {
 		return "";
 	}
-	
+
 	public String getCreateTableFooter() {
 		return "";
 	}
