@@ -26,13 +26,13 @@ import com.ams.poi.xls2sql.util.Path;
 
 /**
  * <p>
- * ƒ^ƒCƒgƒ‹: GenerateJavaEnumManager
+ * ã‚¿ã‚¤ãƒˆãƒ«: GenerateJavaEnumManager
  * </p>
  * <p>
- * à–¾: XLSƒtƒ@ƒCƒ‹DBƒe[ƒuƒ‹’è‹`‘‚ğ“Ç‚İæ‚è Java Jersey Resource(WEB API)ƒNƒ‰ƒX‚ğ¶¬‚·‚é<BR>
+ * èª¬æ˜: XLSãƒ•ã‚¡ã‚¤ãƒ«DBãƒ†ãƒ¼ãƒ–ãƒ«å®šç¾©æ›¸ã‚’èª­ã¿å–ã‚Š Java Jersey Resource(WEB API)ã‚¯ãƒ©ã‚¹ã‚’ç”Ÿæˆã™ã‚‹<BR>
  * </p>
  * <p>
- * ’˜ìŒ : Copyright (c) 2009 PowerBEANS Inc
+ * è‘—ä½œæ¨©: Copyright (c) 2009 PowerBEANS Inc
  * </p>
  * <p>
  * PowerBEANS.Inc
@@ -41,7 +41,7 @@ import com.ams.poi.xls2sql.util.Path;
  * Created on 2003/07/25
  * </p>
  * 
- * @author –å“c–¾•F
+ * @author é–€ç”°æ˜å½¦
  * @version 1.0
  */
 public class GenerateJavaJerseyResourceManager {
@@ -63,26 +63,26 @@ public class GenerateJavaJerseyResourceManager {
 
 	// -- static final
 
-	// ƒe[ƒuƒ‹’è‹`SheetName (Table##)
+	// ãƒ†ãƒ¼ãƒ–ãƒ«å®šç¾©SheetName (Table##)
 	// private static final String SHEETNAME_TABLE_PREFIX = "Table";
-	// ƒe[ƒuƒ‹’è‹`SheetName (Insert##)
+	// ãƒ†ãƒ¼ãƒ–ãƒ«å®šç¾©SheetName (Insert##)
 	private static final String TARGET_SHEETNAME_PREFIX = "Jersey";
 
-	// ‘SINSERTSQLƒtƒ@ƒCƒ‹–¼
+	// å…¨INSERTSQLãƒ•ã‚¡ã‚¤ãƒ«å
 	// public static final String INSERT_ALL_SQL_FILE = "insert_all.sql";
 
-	// ƒIƒvƒVƒ‡ƒ“Hash
+	// ã‚ªãƒ—ã‚·ãƒ§ãƒ³Hash
 	private HashMap opt_map = new HashMap();
 
 	/**
-	 * ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	 * ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	 * 
 	 * @param xls_file
-	 *            XLSƒtƒ@ƒCƒ‹
+	 *            XLSãƒ•ã‚¡ã‚¤ãƒ«
 	 * @param out_dir
-	 *            o—ÍƒfƒBƒŒƒNƒgƒŠ
+	 *            å‡ºåŠ›ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
 	 * @param encode
-	 *            o—Í•¶šƒR[ƒh
+	 *            å‡ºåŠ›æ–‡å­—ã‚³ãƒ¼ãƒ‰
 	 */
 	public GenerateJavaJerseyResourceManager(String xls_file, String out_dir)
 			throws FileNotFoundException, IOException {
@@ -97,14 +97,14 @@ public class GenerateJavaJerseyResourceManager {
 	}
 
 	/**
-	 * ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	 * ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	 */
 	private GenerateJavaJerseyResourceManager() {
 		super();
 	}
 
 	/**
-	 * o—Í
+	 * å‡ºåŠ›
 	 * 
 	 * @param dbms
 	 * @param output_sql_encode
@@ -120,8 +120,8 @@ public class GenerateJavaJerseyResourceManager {
 		int sheet_num = 0;
 		int num = 0;
 
-		// ‘SƒV[ƒg‚É‘Î‚µ‚ÄƒV[ƒg–¼‚ª 'JerseyXxx' ‚Å‚ ‚ê‚Î
-		// ‰ğÍ‚µ‚Äo—Í‚·‚éB
+		// å…¨ã‚·ãƒ¼ãƒˆã«å¯¾ã—ã¦ã‚·ãƒ¼ãƒˆåãŒ 'JerseyXxx' ã§ã‚ã‚Œã°
+		// è§£æã—ã¦å‡ºåŠ›ã™ã‚‹ã€‚
 
 		for (int i = 0; i < workbook.getNumberOfSheets(); i++) {
 
@@ -139,25 +139,25 @@ public class GenerateJavaJerseyResourceManager {
 
 	/**
 	 * sheet2JavaJersey<BR>
-	 * ˆø”‚ÌƒV[ƒg‚©‚çƒe[ƒuƒ‹‚ğæ“¾‚µJavaJerseyResourceƒtƒ@ƒCƒ‹‚ğì¬B<BR>
-	 * 1ƒV[ƒg‚É•¡”‚Ìƒe[ƒuƒ‹’è‹`‚ª‹Lq‚³‚ê‚Ä‚¢‚é‚Æ‚·‚éB
+	 * å¼•æ•°ã®ã‚·ãƒ¼ãƒˆã‹ã‚‰ãƒ†ãƒ¼ãƒ–ãƒ«ã‚’å–å¾—ã—JavaJerseyResourceãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä½œæˆã€‚<BR>
+	 * 1ã‚·ãƒ¼ãƒˆã«è¤‡æ•°ã®ãƒ†ãƒ¼ãƒ–ãƒ«å®šç¾©ãŒè¨˜è¿°ã•ã‚Œã¦ã„ã‚‹ã¨ã™ã‚‹ã€‚
 	 * 
 	 * @param sheet
-	 *            ƒe[ƒuƒ‹’è‹`‚ª‹Lq‚³‚ê‚Ä‚¢‚éƒV[ƒg
+	 *            ãƒ†ãƒ¼ãƒ–ãƒ«å®šç¾©ãŒè¨˜è¿°ã•ã‚Œã¦ã„ã‚‹ã‚·ãƒ¼ãƒˆ
 	 * @param dbms
 	 *            DBMS type
 	 * @param output_jsp_encode
-	 * @return ì¬‚µ‚½SQLƒtƒ@ƒCƒ‹”
+	 * @return ä½œæˆã—ãŸSQLãƒ•ã‚¡ã‚¤ãƒ«æ•°
 	 * @throws Exception
 	 */
 	private int sheet2JavaJersey(HSSFSheet sheet, DbmsType dbms, String output_java_encode, String output_jsp_encode) throws Exception {
 
 		// short koumoku_col = 1;
 		short table_col = 1;
-		// final String KOUMOKU_COLUMN = "€–Ú";
+		// final String KOUMOKU_COLUMN = "é …ç›®";
 		final String TABLE_START_MARK = "(";
 
-		// Jersey API’è‹`‰ğÍ --
+		// Jersey APIå®šç¾©è§£æ --
 		Iterator rowit = sheet.rowIterator();
 		int sql_num = 0;
 		int r = 1;
@@ -176,16 +176,16 @@ public class GenerateJavaJerseyResourceManager {
 			if (mark_cell.getStringCellValue().substring(0, 1).equals(
 					TABLE_START_MARK)) {
 
-				// "(" ‚Ìs ‚ğƒe[ƒuƒ‹æ“ªs‚Æ‚µ‚Äæ“¾
+				// "(" ã®è¡Œ ã‚’ãƒ†ãƒ¼ãƒ–ãƒ«å…ˆé ­è¡Œã¨ã—ã¦å–å¾—
 				table_row_top = row.getRowNum();
-				table_row_bottom = table_row_top + 1; // ƒJƒ‰ƒ€s‚Ì•ª‚ğ’Ç‰Á
+				table_row_bottom = table_row_top + 1; // ã‚«ãƒ©ãƒ è¡Œã®åˆ†ã‚’è¿½åŠ 
 
-				// ‚à‚µ(‚Ìs‚ÌÅŒã‚ª "add" ‚Ìê‡‚Í DELETE •¶‚ğ’Ç‰Á‚µ‚È‚¢
+				// ã‚‚ã—(ã®è¡Œã®æœ€å¾ŒãŒ "add" ã®å ´åˆã¯ DELETE æ–‡ã‚’è¿½åŠ ã—ãªã„
 				boolean is_add_only = mark_cell.getStringCellValue().endsWith(
 						"add");
 
-				// ƒe[ƒuƒ‹ƒf[ƒ^’è‹`ÅIs‚ğ’T‚·
-				// AMS table_row_bottom + 1 ‚ğ table_row_bottom ‚É•ÏX
+				// ãƒ†ãƒ¼ãƒ–ãƒ«ãƒ‡ãƒ¼ã‚¿å®šç¾©æœ€çµ‚è¡Œã‚’æ¢ã™
+				// AMS table_row_bottom + 1 ã‚’ table_row_bottom ã«å¤‰æ›´
 				rb_loop: while (table_row_bottom + 1 <= sheet.getLastRowNum()
 				// rb_loop:while(table_row_bottom + 1 <= sheet.getLastRowNum()
 						&& sheet.getRow(table_row_bottom + 1) != null) {
@@ -217,10 +217,10 @@ public class GenerateJavaJerseyResourceManager {
 				WebAPIMethod m = getTableValuesDefFromSheet(sheet,
 						table_row_top, table_row_bottom);
 				
-				// ƒe[ƒuƒ‹’è‹`æ“¾. Œ»ó"Table"‚Ì‚İ‘Î‰
+				// ãƒ†ãƒ¼ãƒ–ãƒ«å®šç¾©å–å¾—. ç¾çŠ¶"Table"ã®ã¿å¯¾å¿œ
 				TableDef td = ParseUtil.getTableDef(workbook.getSheet("Table"), mark_cell.getStringCellValue());
 
-				{ // 2. Resource ‚ğo—Í
+				{ // 2. Resource ã‚’å‡ºåŠ›
 					final String filename = m.getTableNamePhysics()
 							+ "Resource.java";
 					System.out.print("Export Jersey WebAPI Resource to "
@@ -239,7 +239,7 @@ public class GenerateJavaJerseyResourceManager {
 					}
 
 				}
-				// ŒÅ’èƒtƒ@ƒCƒ‹‚ğo—Í
+				// å›ºå®šãƒ•ã‚¡ã‚¤ãƒ«ã‚’å‡ºåŠ›
 
 			}
 			r++;
@@ -257,10 +257,10 @@ public class GenerateJavaJerseyResourceManager {
 
 	/**
 	 * setTableDefOptions<BR>
-	 * ƒe[ƒuƒ‹’è‹`ƒIƒvƒVƒ‡ƒ“İ’è
+	 * ãƒ†ãƒ¼ãƒ–ãƒ«å®šç¾©ã‚ªãƒ—ã‚·ãƒ§ãƒ³è¨­å®š
 	 * 
 	 * @param td
-	 *            ƒe[ƒuƒ‹’è‹`
+	 *            ãƒ†ãƒ¼ãƒ–ãƒ«å®šç¾©
 	 */
 	private void setTableDefOptions(TableDef td) {
 
@@ -270,16 +270,16 @@ public class GenerateJavaJerseyResourceManager {
 
 	/**
 	 * getTableValuesDefFromSheet<BR>
-	 * ƒV[ƒg‚Ìw’ès‚©‚ç‚Pƒe[ƒuƒ‹‚É‘Î‚·‚éJerseyİ’èˆê——‚ğæ“¾B<BR>
-	 * ‚©‚È‚èƒV[ƒg‚Ìd—l‘‚ÉˆË‘¶‚µ‚Ä‚¢‚éB
+	 * ã‚·ãƒ¼ãƒˆã®æŒ‡å®šè¡Œã‹ã‚‰ï¼‘ãƒ†ãƒ¼ãƒ–ãƒ«ã«å¯¾ã™ã‚‹Jerseyè¨­å®šä¸€è¦§ã‚’å–å¾—ã€‚<BR>
+	 * ã‹ãªã‚Šã‚·ãƒ¼ãƒˆã®ä»•æ§˜æ›¸ã«ä¾å­˜ã—ã¦ã„ã‚‹ã€‚
 	 * 
 	 * @param sheet
-	 *            ƒV[ƒg
+	 *            ã‚·ãƒ¼ãƒˆ
 	 * @param table_row_top
-	 *            æ“ªs(ƒe[ƒuƒ‹–¼s)
+	 *            å…ˆé ­è¡Œ(ãƒ†ãƒ¼ãƒ–ãƒ«åè¡Œ)
 	 * @param table_row_bottom
-	 *            ÅIs
-	 * @return ƒe[ƒuƒ‹INSERTƒf[ƒ^’è‹`
+	 *            æœ€çµ‚è¡Œ
+	 * @return ãƒ†ãƒ¼ãƒ–ãƒ«INSERTãƒ‡ãƒ¼ã‚¿å®šç¾©
 	 */
 	private WebAPIMethod getTableValuesDefFromSheet(HSSFSheet sheet,
 			int table_row_top, int table_row_bottom) {
@@ -288,14 +288,14 @@ public class GenerateJavaJerseyResourceManager {
 		// TableValuesDef tvd = new TableValuesDef();
 		short table_all_col = 1;
 		{
-			// ƒe[ƒuƒ‹–¼ (XX)ƒƒjƒ…[•ª—Şƒ}ƒXƒ^(MstMenuBunrui)
+			// ãƒ†ãƒ¼ãƒ–ãƒ«å (XX)ãƒ¡ãƒ‹ãƒ¥ãƒ¼åˆ†é¡ãƒã‚¹ã‚¿(MstMenuBunrui)
 			// ^n1 ^n2 ^n3
 			HSSFRow row = sheet.getRow(table_row_top);
 			String org_text = row.getCell(table_all_col).getStringCellValue();
 			int n1 = org_text.indexOf(')');
 			int n2 = org_text.indexOf('(', n1);
 			int n3 = org_text.indexOf(')', n2);
-			if (n1 == -1 || n2 == -1) { // ‰ğÍ•s‰Â
+			if (n1 == -1 || n2 == -1) { // è§£æä¸å¯
 				return m;
 			}
 			// tvd.setTableNameLogic(org_text.substring(n1 + 1, n2));
@@ -305,7 +305,7 @@ public class GenerateJavaJerseyResourceManager {
 			
 		}
 
-		// ŠeAPIo—Í—L–³‚ğæ“¾
+		// å„APIå‡ºåŠ›æœ‰ç„¡ã‚’å–å¾—
 		for (int i = 0; i < 4; i++) {
 			HSSFRow row = sheet.getRow(table_row_top + 2);
 			String org_text = row.getCell((short) (table_all_col + i))
@@ -344,7 +344,7 @@ public class GenerateJavaJerseyResourceManager {
 		// cell_right++;
 		// }
 		// }
-		// // ŠeƒtƒB[ƒ‹ƒh–¼‚ğ‰ğÍ
+		// // å„ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰åã‚’è§£æ
 		// {
 		// ArrayList fieldData = new ArrayList();
 		// HSSFRow row = sheet.getRow(table_row_top + 2);
@@ -358,15 +358,15 @@ public class GenerateJavaJerseyResourceManager {
 		// tvd.setFieldNameList(fieldData);
 		// }
 		//		
-		// // ŠeƒtƒB[ƒ‹ƒhî•ñ‚ğ‰ğÍ
+		// // å„ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰æƒ…å ±ã‚’è§£æ
 		// for (int r = table_row_top + 3; r <= table_row_bottom; r++) {
 		// ArrayList recordData = new ArrayList();
 		// HSSFRow row = sheet.getRow(r);
 		// for (short c = cell_left; c <= cell_right; c++) {
-		// // ŠeƒZƒ‹‚Ì’l‚ğDoubleŒ^‚©StringŒ^‚ÅŠi”[
+		// // å„ã‚»ãƒ«ã®å€¤ã‚’Doubleå‹ã‹Stringå‹ã§æ ¼ç´
 		// HSSFCell cell = row.getCell(c);
 		// if (cell == null) {
-		// // ‹óƒZƒ‹‚Ìê‡‚ÍNULL‚ğ“ü‚ê‚é
+		// // ç©ºã‚»ãƒ«ã®å ´åˆã¯NULLã‚’å…¥ã‚Œã‚‹
 		// recordData.add("NULL");
 		// continue;
 		// }
@@ -377,12 +377,12 @@ public class GenerateJavaJerseyResourceManager {
 		//
 		// case HSSFCell.CELL_TYPE_NUMERIC :
 		// // recordData.add(new Double(cell.getNumericCellValue()));
-		// // ®”‚©­”‚©‚ğİ’è’l‚©‚ç”»’f
+		// // æ•´æ•°ã‹å°‘æ•°ã‹ã‚’è¨­å®šå€¤ã‹ã‚‰åˆ¤æ–­
 		// double org_val = cell.getNumericCellValue();
-		// if (org_val == (int) org_val) { // ®”
+		// if (org_val == (int) org_val) { // æ•´æ•°
 		// recordData.add(new Integer((int) org_val));
 		// } else {
-		// // ¬”
+		// // å°æ•°
 		// recordData.add(
 		// new Double(cell.getNumericCellValue()));
 		// }
@@ -413,16 +413,16 @@ public class GenerateJavaJerseyResourceManager {
 
 	/**
 	 * getTableDefFromSheet<BR>
-	 * ƒV[ƒg‚Ìw’ès‚©‚çƒe[ƒuƒ‹’è‹`‚ğæ“¾B<BR>
-	 * ‚©‚È‚èƒV[ƒg‚Ìd—l‘‚ÉˆË‘¶‚µ‚Ä‚¢‚é
+	 * ã‚·ãƒ¼ãƒˆã®æŒ‡å®šè¡Œã‹ã‚‰ãƒ†ãƒ¼ãƒ–ãƒ«å®šç¾©ã‚’å–å¾—ã€‚<BR>
+	 * ã‹ãªã‚Šã‚·ãƒ¼ãƒˆã®ä»•æ§˜æ›¸ã«ä¾å­˜ã—ã¦ã„ã‚‹
 	 * 
 	 * @param sheet
-	 *            ƒV[ƒg
+	 *            ã‚·ãƒ¼ãƒˆ
 	 * @param table_row_top
-	 *            æ“ªs(ƒe[ƒuƒ‹–¼s)
+	 *            å…ˆé ­è¡Œ(ãƒ†ãƒ¼ãƒ–ãƒ«åè¡Œ)
 	 * @param table_row_bottom
-	 *            ÅIs
-	 * @return ƒe[ƒuƒ‹’è‹`
+	 *            æœ€çµ‚è¡Œ
+	 * @return ãƒ†ãƒ¼ãƒ–ãƒ«å®šç¾©
 	 */
 	private TableDef getTableDefFromSheet(HSSFSheet sheet, int table_row_top,
 			int table_row_bottom) {
@@ -435,22 +435,22 @@ public class GenerateJavaJerseyResourceManager {
 		short default_val = 5;
 		short index_name = 6;
 		short note = 7;
-		// String null_on = "~";
+		// String null_on = "Ã—";
 		String default_system = "System";
 		{
-			// ƒe[ƒuƒ‹–¼ (XX)ƒƒjƒ…[•ª—Şƒ}ƒXƒ^(MstMenuBunrui)
+			// ãƒ†ãƒ¼ãƒ–ãƒ«å (XX)ãƒ¡ãƒ‹ãƒ¥ãƒ¼åˆ†é¡ãƒã‚¹ã‚¿(MstMenuBunrui)
 			// ^n1 ^n2 ^n3
 			HSSFRow row = sheet.getRow(table_row_top);
 			String org_text = row.getCell(table_all_col).getStringCellValue();
 			int n1 = org_text.indexOf(')');
 			int n2 = org_text.indexOf('(', n1);
 			int n3 = org_text.indexOf(')', n2);
-			if (n1 == -1 || n2 == -1) { // ‰ğÍ•s‰Â
+			if (n1 == -1 || n2 == -1) { // è§£æä¸å¯
 				return td;
 			}
 			td.setTableNameLogic(org_text.substring(n1 + 1, n2));
 			td.setTableNamePhysics(org_text.substring(n2 + 1, n3));
-		} // ŠeƒtƒB[ƒ‹ƒhî•ñ‚ğ‰ğÍ
+		} // å„ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰æƒ…å ±ã‚’è§£æ
 		for (int r = table_row_top + 2; r <= table_row_bottom; r++) {
 			FieldDef fd = new FieldDef();
 			HSSFRow row = sheet.getRow(r);
@@ -462,7 +462,7 @@ public class GenerateJavaJerseyResourceManager {
 			String not_null = StringUtils.trim(row.getCell(is_null)
 					.getStringCellValue());
 			fd.setNotNull(!(not_null == null || not_null.length() == 0));
-			// default ‚Í •¶š—ñ or ”’l
+			// default ã¯ æ–‡å­—åˆ— or æ•°å€¤
 			switch (row.getCell(default_val).getCellType()) {
 			case HSSFCell.CELL_TYPE_STRING:
 				String def_string = StringUtils.trim(row.getCell(default_val)
@@ -478,7 +478,7 @@ public class GenerateJavaJerseyResourceManager {
 				double def_num = row.getCell(default_val).getNumericCellValue();
 				fd.setDefaultValue(Double.toString(def_num));
 				break;
-			default: // ‰ğÍ•s‰Â
+			default: // è§£æä¸å¯
 			}
 
 			fd.setIndexName(row.getCell(index_name).getStringCellValue());
@@ -519,7 +519,7 @@ public class GenerateJavaJerseyResourceManager {
 	}
 
 	/**
-	 * ƒIƒvƒVƒ‡ƒ“’l‚ğŠi”[
+	 * ã‚ªãƒ—ã‚·ãƒ§ãƒ³å€¤ã‚’æ ¼ç´
 	 * 
 	 * @param key
 	 * @param val

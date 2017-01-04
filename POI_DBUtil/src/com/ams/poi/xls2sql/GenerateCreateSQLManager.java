@@ -27,16 +27,16 @@ import com.ams.poi.xls2sql.util.CommonUtil;
 import com.ams.poi.xls2sql.util.FileUtil;
 
 /**
- * <p>ƒ^ƒCƒgƒ‹: GenerateCreateSQLManager</p>
- * <p>à–¾:
- * XLSƒtƒ@ƒCƒ‹DBƒe[ƒuƒ‹’è‹`‘‚ğ“Ç‚İæ‚è
- * Create SQL ƒtƒ@ƒCƒ‹‚ğo—Í‚·‚éB<BR>
- * Œã‚ÅƒtƒH[ƒ}ƒbƒg‚ğpropertiesƒtƒ@ƒCƒ‹‚Åw’è‚Å‚«‚é‚æ‚¤‚É‚·‚éB
+ * <p>ã‚¿ã‚¤ãƒˆãƒ«: GenerateCreateSQLManager</p>
+ * <p>èª¬æ˜:
+ * XLSãƒ•ã‚¡ã‚¤ãƒ«DBãƒ†ãƒ¼ãƒ–ãƒ«å®šç¾©æ›¸ã‚’èª­ã¿å–ã‚Š
+ * Create SQL ãƒ•ã‚¡ã‚¤ãƒ«ã‚’å‡ºåŠ›ã™ã‚‹ã€‚<BR>
+ * å¾Œã§ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã‚’propertiesãƒ•ã‚¡ã‚¤ãƒ«ã§æŒ‡å®šã§ãã‚‹ã‚ˆã†ã«ã™ã‚‹ã€‚
  * </p>
- * <p>’˜ìŒ : Copyright (c) 2009 PowerBEANS Inc</p>
+ * <p>è‘—ä½œæ¨©: Copyright (c) 2009 PowerBEANS Inc</p>
  * <p>PowerBEANS.Inc</p>
  * <p>Created on 2003/07/25</p>
- * @author –å“c–¾•F
+ * @author é–€ç”°æ˜å½¦
  * @version 1.0
  */
 public class GenerateCreateSQLManager {
@@ -61,28 +61,28 @@ public class GenerateCreateSQLManager {
 
 	// -- static final
 
-	// ƒe[ƒuƒ‹’è‹`SheetName (Table##)
+	// ãƒ†ãƒ¼ãƒ–ãƒ«å®šç¾©SheetName (Table##)
 	private static final String TABLE_DEF_SHEETNAME = "Table";
 
-  // ‘SCreateSQLo—Íƒtƒ@ƒCƒ‹–¼ (DROP, CREATE)
+  // å…¨CreateSQLå‡ºåŠ›ãƒ•ã‚¡ã‚¤ãƒ«å (DROP, CREATE)
   public static final String CREATE_ALL_SQL_FILE = "create_all.sql";
 
-  // ‘SCreateSQLo—Íƒtƒ@ƒCƒ‹–¼ (DROP ‚È‚µ, CREATE‚Ì‚İ)
+  // å…¨CreateSQLå‡ºåŠ›ãƒ•ã‚¡ã‚¤ãƒ«å (DROP ãªã—, CREATEã®ã¿)
   public static final String CREATE_ALL_NODROP_SQL_FILE = "create_all_first.sql";
 
-  // JAVA ƒtƒ@ƒCƒ‹o—ÍƒfƒBƒŒƒNƒgƒŠ–¼
+  // JAVA ãƒ•ã‚¡ã‚¤ãƒ«å‡ºåŠ›ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªå
   private static final String JAVA_DIR = File.separator + "java";
 
-  // Objective-C ƒtƒ@ƒCƒ‹o—ÍƒfƒBƒŒƒNƒgƒŠ–¼
+  // Objective-C ãƒ•ã‚¡ã‚¤ãƒ«å‡ºåŠ›ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªå
 private static final String OBJECTIVE_C_DIR = File.separator + "objective-c";
 
-// JAVA(JDO) ƒtƒ@ƒCƒ‹o—ÍƒfƒBƒŒƒNƒgƒŠ–¼
+// JAVA(JDO) ãƒ•ã‚¡ã‚¤ãƒ«å‡ºåŠ›ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªå
 private static final String JAVA_JDO_DIR = File.separator + "java_jdo";
 
 	/**
-	 * ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	 * @param xls_file XLSƒtƒ@ƒCƒ‹
-	 * @param out_dir o—ÍƒfƒBƒŒƒNƒgƒŠ
+	 * ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+	 * @param xls_file XLSãƒ•ã‚¡ã‚¤ãƒ«
+	 * @param out_dir å‡ºåŠ›ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
 	 */
 	public GenerateCreateSQLManager(String xls_file, String out_dir)
 		throws FileNotFoundException, IOException {
@@ -94,13 +94,13 @@ private static final String JAVA_JDO_DIR = File.separator + "java_jdo";
 		workbook = new HSSFWorkbook(fs);
 
 		// get sheet
-		//		HSSFSheet sheet = workbook.getSheet("Sheet1"); // ‘SŠp‚Í‚¾‚ß
+		//		HSSFSheet sheet = workbook.getSheet("Sheet1"); // å…¨è§’ã¯ã ã‚
 
 		outDir = out_dir;
 	}
 
 	/**
-	 * ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	 * ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	 */
 	private GenerateCreateSQLManager() {
 		super();
@@ -108,9 +108,9 @@ private static final String JAVA_JDO_DIR = File.separator + "java_jdo";
 
 ////	/**
 ////	 * generateCreateSQL<BR>
-////	 * @param xls_file “Ç‚İ‚ŞXLSƒtƒ@ƒCƒ‹
-////	 * @param out_dir o—Í‚·‚éƒfƒBƒŒƒNƒgƒŠ
-////	 * @return ¶¬‚µ‚½SQLƒtƒ@ƒCƒ‹”
+////	 * @param xls_file èª­ã¿è¾¼ã‚€XLSãƒ•ã‚¡ã‚¤ãƒ«
+////	 * @param out_dir å‡ºåŠ›ã™ã‚‹ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
+////	 * @return ç”Ÿæˆã—ãŸSQLãƒ•ã‚¡ã‚¤ãƒ«æ•°
 ////	 */
 ////	public int generateCreateSQL() {
 ////        return generateCreateSQL(DbmsType.ORACLE);
@@ -126,8 +126,8 @@ private static final String JAVA_JDO_DIR = File.separator + "java_jdo";
       int create_sheet_num = 0;
       int crate_sql_num = 0;
 
-      // ‘SƒV[ƒg‚É‘Î‚µ‚ÄƒV[ƒg–¼‚ª 'TableXxx' ‚Å‚ ‚ê‚Î
-      // ‰ğÍ‚µ‚ÄCreateSQL ‚ğo—Í‚·‚éB
+      // å…¨ã‚·ãƒ¼ãƒˆã«å¯¾ã—ã¦ã‚·ãƒ¼ãƒˆåãŒ 'TableXxx' ã§ã‚ã‚Œã°
+      // è§£æã—ã¦CreateSQL ã‚’å‡ºåŠ›ã™ã‚‹ã€‚
 
       for (int i = 0; i < workbook.getNumberOfSheets(); i++) {
 
@@ -139,7 +139,7 @@ private static final String JAVA_JDO_DIR = File.separator + "java_jdo";
         }
       }
 
-      // ‘SSQL‚ğo—Í(drop—L)
+      // å…¨SQLã‚’å‡ºåŠ›(dropæœ‰)
       System.out.print("Export to " + CREATE_ALL_SQL_FILE + "...");
       String output_file = outDir + File.separator + CREATE_ALL_SQL_FILE;
 
@@ -152,7 +152,7 @@ private static final String JAVA_JDO_DIR = File.separator + "java_jdo";
       } finally {
       }
 
-      // ‘SSQL‚ğo—Í(drop–³)
+      // å…¨SQLã‚’å‡ºåŠ›(dropç„¡)
       System.out.print("Export to " + CREATE_ALL_NODROP_SQL_FILE + "...");
       String output_file_nodrop = outDir + File.separator + CREATE_ALL_NODROP_SQL_FILE;
 
@@ -169,18 +169,18 @@ private static final String JAVA_JDO_DIR = File.separator + "java_jdo";
     }
 	/**
 	 * sheet2CreateSQL<BR>
-	 * ˆø”‚ÌƒV[ƒg‚©‚çƒe[ƒuƒ‹‚ğæ“¾‚µCreateSQLƒtƒ@ƒCƒ‹‚ğì¬B<BR>
-	 * 1ƒV[ƒg‚É•¡”‚Ìƒe[ƒuƒ‹’è‹`‚ª‹Lq‚³‚ê‚Ä‚¢‚é‚Æ‚·‚éB
-	 * @param sheet ƒe[ƒuƒ‹’è‹`‚ª‹Lq‚³‚ê‚Ä‚¢‚éƒV[ƒg
+	 * å¼•æ•°ã®ã‚·ãƒ¼ãƒˆã‹ã‚‰ãƒ†ãƒ¼ãƒ–ãƒ«ã‚’å–å¾—ã—CreateSQLãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä½œæˆã€‚<BR>
+	 * 1ã‚·ãƒ¼ãƒˆã«è¤‡æ•°ã®ãƒ†ãƒ¼ãƒ–ãƒ«å®šç¾©ãŒè¨˜è¿°ã•ã‚Œã¦ã„ã‚‹ã¨ã™ã‚‹ã€‚
+	 * @param sheet ãƒ†ãƒ¼ãƒ–ãƒ«å®šç¾©ãŒè¨˜è¿°ã•ã‚Œã¦ã„ã‚‹ã‚·ãƒ¼ãƒˆ
      * @param dbms DBMS
-	 * @return ì¬‚µ‚½SQLƒtƒ@ƒCƒ‹”
+	 * @return ä½œæˆã—ãŸSQLãƒ•ã‚¡ã‚¤ãƒ«æ•°
 	 * @throws Exception
 	 */
 	private int sheet2CreateSQLs(HSSFSheet sheet, DbmsType dbms, String output_sql_encode) throws Exception {
 
 // short koumoku_col = 1;
 		short table_col = 1;
-		// final String KOUMOKU_COLUMN = "€–Ú";
+		// final String KOUMOKU_COLUMN = "é …ç›®";
 		final String TABLE_START_MARK = "(";
 
 		CreateSQLFactory factory = new CreateSQLFactory();
@@ -189,11 +189,11 @@ private static final String JAVA_JDO_DIR = File.separator + "java_jdo";
 		// Objective C DBMgr manager
 		ObjectiveCDBMgrMaker oc_dbmgr = new ObjectiveCDBMgrMaker();
 
-		// create_all.sql prefix ‚ğ’Ç‰Á
+		// create_all.sql prefix ã‚’è¿½åŠ 
 		allCreateSQL.append(create_sql.getCreateTableHeader());
 		allCreateSQL_nodrop.append(create_sql.getCreateTableHeader());
 
-		// ƒe[ƒuƒ‹‰ğÍ --
+		// ãƒ†ãƒ¼ãƒ–ãƒ«è§£æ --
 		Iterator rowit = sheet.rowIterator();
 		int create_sql_num = 0;
 		int r = 1;
@@ -203,7 +203,7 @@ private static final String JAVA_JDO_DIR = File.separator + "java_jdo";
 			TableDef td = null;
 			int table_row_top, table_row_bottom;
 
-			// TODO ‚Qs˜A‘±‚Å null‚¾‚Á‚½‚çbreak‚·‚é‚©
+			// TODO ï¼’è¡Œé€£ç¶šã§ nullã ã£ãŸã‚‰breakã™ã‚‹ã‹
 			if (before_cell == null && row.getCell(table_col) == null && row.getRowNum() > 0) {
 				break;
 			}
@@ -215,11 +215,11 @@ private static final String JAVA_JDO_DIR = File.separator + "java_jdo";
 			String cell_value = row.getCell(table_col).getStringCellValue();
 			if (cell_value.startsWith(TABLE_START_MARK)) {
 
-				// "(" ‚Ìs ‚ğƒe[ƒuƒ‹æ“ªs‚Æ‚µ‚Äæ“¾
+				// "(" ã®è¡Œ ã‚’ãƒ†ãƒ¼ãƒ–ãƒ«å…ˆé ­è¡Œã¨ã—ã¦å–å¾—
 				table_row_top = row.getRowNum();
 				table_row_bottom = table_row_top;
 
-				// ƒe[ƒuƒ‹’è‹`ÅIs‚ğ’T‚·
+				// ãƒ†ãƒ¼ãƒ–ãƒ«å®šç¾©æœ€çµ‚è¡Œã‚’æ¢ã™
 				while (table_row_bottom + 1 <= sheet.getLastRowNum()
 						&& sheet.getRow(table_row_bottom + 1) != null
 						&& sheet.getRow(table_row_bottom + 1)
@@ -233,16 +233,16 @@ private static final String JAVA_JDO_DIR = File.separator + "java_jdo";
 				td = getTableDefFromSheet(sheet, table_row_top,
 						table_row_bottom);
 
-				// ƒLƒƒƒbƒVƒ…‚É’Ç‰Á
+				// ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã«è¿½åŠ 
 				TableDefCache.add(td);
 
 				System.out.print("Export to " + td.getTableNamePhysics()
 						+ ".sql ...");
 
-				// ƒe[ƒuƒ‹’è‹`ƒIƒvƒVƒ‡ƒ“
+				// ãƒ†ãƒ¼ãƒ–ãƒ«å®šç¾©ã‚ªãƒ—ã‚·ãƒ§ãƒ³
 				setTableDefOptions(td);
 
-				// ƒe[ƒuƒ‹’è‹`‚ğsqlƒtƒ@ƒCƒ‹‚Éo—Í(Drop—L)
+				// ãƒ†ãƒ¼ãƒ–ãƒ«å®šç¾©ã‚’sqlãƒ•ã‚¡ã‚¤ãƒ«ã«å‡ºåŠ›(Dropæœ‰)
 				String file_out = create_sql.getOutputFileString(td, true);
 				String output_file = outDir + File.separator
 						+ td.getTableNamePhysics() + ".sql";
@@ -252,7 +252,7 @@ private static final String JAVA_JDO_DIR = File.separator + "java_jdo";
 							.writeFile(output_file, file_out, output_sql_encode);
 					System.out.println(" ok.");
 					create_sql_num++;
-					// ‘Sƒtƒ@ƒCƒ‹ƒoƒbƒtƒ@(Drop—L)‚É’Ç‰Á
+					// å…¨ãƒ•ã‚¡ã‚¤ãƒ«ãƒãƒƒãƒ•ã‚¡(Dropæœ‰)ã«è¿½åŠ 
 					allCreateSQL.append(file_out);
 
 				} catch (IOException e) {
@@ -260,26 +260,26 @@ private static final String JAVA_JDO_DIR = File.separator + "java_jdo";
 				} finally {
 				}
 
-				////// o—Í1 create sql ///////////////
-				// ƒe[ƒuƒ‹’è‹`‚ğsqlƒtƒ@ƒCƒ‹‚Éo—Í(Drop–³)
+				////// å‡ºåŠ›1 create sql ///////////////
+				// ãƒ†ãƒ¼ãƒ–ãƒ«å®šç¾©ã‚’sqlãƒ•ã‚¡ã‚¤ãƒ«ã«å‡ºåŠ›(Dropç„¡)
 				String file_out_nodrop = create_sql.getOutputFileString(td,
 						false);
-				// ‘Sƒtƒ@ƒCƒ‹ƒoƒbƒtƒ@(Drop–³‚µ)‚É’Ç‰Á
+				// å…¨ãƒ•ã‚¡ã‚¤ãƒ«ãƒãƒƒãƒ•ã‚¡(Dropç„¡ã—)ã«è¿½åŠ 
 				allCreateSQL_nodrop.append(file_out_nodrop);
 
 		  		if (!CommonUtil.doCreateSqlFileOnly()) {
 
-					////// o—Í2 Java Model  ///////////////
+					////// å‡ºåŠ›2 Java Model  ///////////////
 					outputForJava(output_sql_encode, td);
 
-					////// o—Í3 Objective-C  ///////////////
+					////// å‡ºåŠ›3 Objective-C  ///////////////
 					try {
 						outputForObjectiveC(output_sql_encode, td, oc_dbmgr);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
 
-					////// o—Í4 JDO (for Google App Engine) ///////////
+					////// å‡ºåŠ›4 JDO (for Google App Engine) ///////////
 					outputForJdo(output_sql_encode, td);
 
 		  		}
@@ -289,7 +289,7 @@ private static final String JAVA_JDO_DIR = File.separator + "java_jdo";
 		}
 
   		if (!CommonUtil.doCreateSqlFileOnly()) {
-  			// Objective-C DBMgr‚ğo—Í
+  			// Objective-C DBMgrã‚’å‡ºåŠ›
   			oc_dbmgr.onEndFile();
   			try {
   				String header = oc_dbmgr.getHeaderSource();
@@ -316,7 +316,7 @@ private static final String JAVA_JDO_DIR = File.separator + "java_jdo";
 	}
 
 	/**
-	 * JDOƒ‚ƒfƒ‹‚ğ’Ç‰Á
+	 * JDOãƒ¢ãƒ‡ãƒ«ã‚’è¿½åŠ 
 	 * @param output_sql_encode
 	 * @param td
 	 */
@@ -354,8 +354,8 @@ private static final String JAVA_JDO_DIR = File.separator + "java_jdo";
 				+ td.getTableNamePhysicsTopUpper() + ".h";
 
 		// 3.2 Objective-C DBMgr
-		// TODO xxxById, findXxxAll, findXxx (2‚Â–Ú‚Ì€–Ú,ƒRƒƒ“ƒgo—Í), create, insert, update
-		// Table td ‚Ì’è‹`‚ÉŠî‚Ã‚¢‚ÄŠeƒƒ\ƒbƒh‚Ìƒ\[ƒX‚ğ“à•”‚Éo—Í
+		// TODO xxxById, findXxxAll, findXxx (2ã¤ç›®ã®é …ç›®,ã‚³ãƒ¡ãƒ³ãƒˆå‡ºåŠ›), create, insert, update
+		// Table td ã®å®šç¾©ã«åŸºã¥ã„ã¦å„ãƒ¡ã‚½ãƒƒãƒ‰ã®ã‚½ãƒ¼ã‚¹ã‚’å†…éƒ¨ã«å‡ºåŠ›
 		oc_dbmgr.addTableDef(td);
 
 		try {
@@ -375,7 +375,7 @@ private static final String JAVA_JDO_DIR = File.separator + "java_jdo";
 	 * @param td
 	 */
 	private void outputForJava(String output_sql_encode, TableDef td) {
-		// Java Bean ‘®«o—Í
+		// Java Bean å±æ€§å‡ºåŠ›
 		{
 		BeanSourceMaker bs = new BeanSourceMaker();
 		String source = bs.getBeanSource(td);
@@ -394,8 +394,8 @@ private static final String JAVA_JDO_DIR = File.separator + "java_jdo";
 
 	/**
 	 * setTableDefOptions<BR>
-	 * ƒe[ƒuƒ‹’è‹`ƒIƒvƒVƒ‡ƒ“İ’è
-	 * @param td ƒe[ƒuƒ‹’è‹`
+	 * ãƒ†ãƒ¼ãƒ–ãƒ«å®šç¾©ã‚ªãƒ—ã‚·ãƒ§ãƒ³è¨­å®š
+	 * @param td ãƒ†ãƒ¼ãƒ–ãƒ«å®šç¾©
 	 */
 	private void setTableDefOptions(TableDef td) {
 
@@ -405,13 +405,13 @@ private static final String JAVA_JDO_DIR = File.separator + "java_jdo";
 
 	/**
 	 * getTableDefFromSheet<BR>
-	 * ƒV[ƒg‚Ìw’ès‚©‚çƒe[ƒuƒ‹’è‹`‚ğæ“¾B<BR>
-	 * ‚©‚È‚èƒV[ƒg‚Ìd—l‘‚ÉˆË‘¶‚µ‚Ä‚¢‚é
+	 * ã‚·ãƒ¼ãƒˆã®æŒ‡å®šè¡Œã‹ã‚‰ãƒ†ãƒ¼ãƒ–ãƒ«å®šç¾©ã‚’å–å¾—ã€‚<BR>
+	 * ã‹ãªã‚Šã‚·ãƒ¼ãƒˆã®ä»•æ§˜æ›¸ã«ä¾å­˜ã—ã¦ã„ã‚‹
 	 *
-	 * @param sheet ƒV[ƒg
-	 * @param table_row_top æ“ªs(ƒe[ƒuƒ‹–¼s)
-	 * @param table_row_bottom ÅIs
-	 * @return ƒe[ƒuƒ‹’è‹`
+	 * @param sheet ã‚·ãƒ¼ãƒˆ
+	 * @param table_row_top å…ˆé ­è¡Œ(ãƒ†ãƒ¼ãƒ–ãƒ«åè¡Œ)
+	 * @param table_row_bottom æœ€çµ‚è¡Œ
+	 * @return ãƒ†ãƒ¼ãƒ–ãƒ«å®šç¾©
 	 */
 	private TableDef getTableDefFromSheet(
 		HSSFSheet sheet,
@@ -435,11 +435,11 @@ private static final String JAVA_JDO_DIR = File.separator + "java_jdo";
     short index_length = 9;
 		short note = 10;
 
-//		String null_on = "~";
+//		String null_on = "Ã—";
 		String default_system = "System";
 
 		{
-			// ƒe[ƒuƒ‹–¼ (XX)ƒƒjƒ…[•ª—Şƒ}ƒXƒ^(MstMenuBunrui)
+			// ãƒ†ãƒ¼ãƒ–ãƒ«å (XX)ãƒ¡ãƒ‹ãƒ¥ãƒ¼åˆ†é¡ãƒã‚¹ã‚¿(MstMenuBunrui)
 			//              ^n1               ^n2           ^n3
 			HSSFRow row = sheet.getRow(table_row_top);
 			String org_text = row.getCell(table_all_col).getStringCellValue();
@@ -447,36 +447,36 @@ private static final String JAVA_JDO_DIR = File.separator + "java_jdo";
 			int n2 = org_text.indexOf('(', n1);
 			int n3 = org_text.indexOf(')', n2);
 			if (n1 == -1 || n2 == -1) {
-				// ‰ğÍ•s‰Â
+				// è§£æä¸å¯
 				return td;
 			}
 			td.setTableNameLogic(org_text.substring(n1 + 1, n2));
 			td.setTableNamePhysics(org_text.substring(n2 + 1, n3));
 
-			// ƒXƒg[ƒŒƒWƒGƒ“ƒWƒ“–¼(for MySQL)
+			// ã‚¹ãƒˆãƒ¼ãƒ¬ã‚¸ã‚¨ãƒ³ã‚¸ãƒ³å(for MySQL)
 			if (row.getCell(strage_engine_col) != null) {
 			    td.setStrageEngineName(row.getCell(strage_engine_col).getStringCellValue());
 			}
 
-			// ƒLƒƒƒ‰ƒNƒ^ƒZƒbƒg(for MySQL)
+			// ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ã‚»ãƒƒãƒˆ(for MySQL)
 			if (row.getCell(character_set_col) != null) {
 				td.setCharacterSetName(row.getCell(character_set_col).getStringCellValue());
 			}
 
-			// ƒf[ƒ^ˆ³k(for MySQL)
+			// ãƒ‡ãƒ¼ã‚¿åœ§ç¸®(for MySQL)
 			if (row.getCell(row_format_col) != null) {
 				td.setRowFormatName(row.getCell(row_format_col).getStringCellValue());
 			}
 		}
 
-		// ŠeƒtƒB[ƒ‹ƒhî•ñ‚ğ‰ğÍ
+		// å„ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰æƒ…å ±ã‚’è§£æ
 		for (int r = table_row_top + 2; r <= table_row_bottom; r++) {
 			FieldDef fd = new FieldDef();
 			HSSFRow row = sheet.getRow(r);
 
 			fd.setFieldNameLogic(row.getCell(koumoku).getStringCellValue());
 
-			// ˜_—–¼‚ªnull‚©""‚Ìê‡‚Í“Ç‚İ‚İ’†~
+			// è«–ç†åãŒnullã‹""ã®å ´åˆã¯èª­ã¿è¾¼ã¿ä¸­æ­¢
 			if (fd.getFieldNameLogic() == null || "".equals(fd.getFieldNameLogic())) {
 			    break;
 			}
@@ -495,7 +495,7 @@ private static final String JAVA_JDO_DIR = File.separator + "java_jdo";
 				StringUtils.trim(row.getCell(is_null).getStringCellValue());
 			fd.setNotNull(!(not_null == null || not_null.length() == 0));
 
-			// default’l ‚Í •¶š—ñ or ”’l
+			// defaultå€¤ ã¯ æ–‡å­—åˆ— or æ•°å€¤
 			switch (row.getCell(default_val).getCellType()) {
 				case HSSFCell.CELL_TYPE_STRING :
 					String def_string =
@@ -517,7 +517,7 @@ private static final String JAVA_JDO_DIR = File.separator + "java_jdo";
 					break;
 
 				default :
-				    // ‚»‚êˆÈŠO‚Ìê‡‚ÍƒfƒtƒHƒ‹ƒg’l‚È‚µ
+				    // ãã‚Œä»¥å¤–ã®å ´åˆã¯ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆå€¤ãªã—
 //		          System.out.println("* row " + r + ", unsupport type " + row.getCell(default_val).getCellType());
 		          // continue;
 			}
@@ -532,7 +532,7 @@ private static final String JAVA_JDO_DIR = File.separator + "java_jdo";
 			}
 
 			if (row.getCell(index_name) != null) {
-				// ƒCƒ“ƒfƒbƒNƒX–¢İ’è‚Í–³‹
+				// ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹æœªè¨­å®šã¯ç„¡è¦–
 				try {
 					fd.setIndexName(StringUtils.trim(row.getCell(index_name).getStringCellValue()));
 				} catch (Exception e) {
@@ -545,7 +545,7 @@ private static final String JAVA_JDO_DIR = File.separator + "java_jdo";
 	      }
 			}
 
-      // note (”õl)
+      // note (å‚™è€ƒ)
       {
       	HSSFCell note_cell = row.getCell(note);
       	if (note_cell != null && note_cell.getCellType() == HSSFCell.CELL_TYPE_STRING) {

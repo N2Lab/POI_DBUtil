@@ -11,18 +11,18 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 
 /**
- * <p>ƒ^ƒCƒgƒ‹: PoiSample</p>
- * <p>à–¾: POIƒTƒ“ƒvƒ‹ƒNƒ‰ƒX</p>
- * <p>’˜ìŒ : Copyright (c) 2009 PowerBEANS Inc</p>
+ * <p>ã‚¿ã‚¤ãƒˆãƒ«: PoiSample</p>
+ * <p>èª¬æ˜: POIã‚µãƒ³ãƒ—ãƒ«ã‚¯ãƒ©ã‚¹</p>
+ * <p>è‘—ä½œæ¨©: Copyright (c) 2009 PowerBEANS Inc</p>
  * <p>PowerBEANS.Inc</p>
  * <p>Created on 2003/07/25</p>
- * @author –å“c–¾•F
+ * @author é–€ç”°æ˜å½¦
  * @version 1.0
  */
 public class PoiSample {
 
 	private static final String XLS_FILE =
-		"E:\\Develop\\JAVA\\study\\Eclipse\\POI_DBUtil\\doc\\ƒe[ƒuƒ‹_ƒJƒXƒ^ƒ}ƒCƒYƒƒjƒ…[.xls";
+		"E:\\Develop\\JAVA\\study\\Eclipse\\POI_DBUtil\\doc\\ãƒ†ãƒ¼ãƒ–ãƒ«_ã‚«ã‚¹ã‚¿ãƒã‚¤ã‚ºãƒ¡ãƒ‹ãƒ¥ãƒ¼.xls";
 
 	public static void main(String[] args) {
 		PoiSample ps = new PoiSample();
@@ -44,7 +44,7 @@ public class PoiSample {
 		HSSFWorkbook workbook = new HSSFWorkbook(fs);
 		
 		// get sheet
-		HSSFSheet sheet = workbook.getSheet("Sheet1"); // ‘SŠp‚Í‚¾‚ß
+		HSSFSheet sheet = workbook.getSheet("Sheet1"); // å…¨è§’ã¯ã ã‚
 		
 		// get Row
 		HSSFRow row = sheet.getRow(4);
