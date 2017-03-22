@@ -105,12 +105,14 @@ public class GenerateInsertSQLManager {
   
 	/**
 	 * generateInsertSQL<BR>
+	 * @param ids_to 
+	 * @param ids_from 
 	 * @param xls_file 読み込むXLSファイル
 	 * @param out_dir 出力するディレクトリ
 	 * @return 生成したSQLファイル数
 	 * @throws Exception
 	 */
-	public int generateInsertSQL(DbmsType dbms, String output_sql_encode, String output_java_encode) throws Exception {
+	public int generateInsertSQL(DbmsType dbms, String output_sql_encode, String output_java_encode, Integer ids_from, Integer ids_to) throws Exception {
 
 		int sheet_num = 0;
 		int sql_num = 0;
@@ -129,7 +131,8 @@ public class GenerateInsertSQLManager {
 		}
 
     // 1. 全SQLを出力
-		{
+		// 1.1 id_from,to 指定無しの場合
+		if (ids_from == -1)	{
 			System.out.print("Export to " + INSERT_ALL_SQL_FILE + "...");
 			String output_file = outDir + File.separator + INSERT_ALL_SQL_FILE;
 
@@ -140,6 +143,21 @@ public class GenerateInsertSQLManager {
 			} catch (IOException e) {
 				System.out.println(" fail.");
 			} finally {
+			}
+		} else {
+			for(int id = ids_from; id <= ids_to; id++) {
+				System.out.print("Export to " + id + "/" + INSERT_ALL_SQL_FILE + "...");
+				String output_file = outDir + File.separator + id + File.separator + INSERT_ALL_SQL_FILE;
+
+				try {
+					FileUtil.writeFile(output_file, getAllInsertSQL().toString().replaceAll("\\{client_id\\}", String.valueOf(id)), output_sql_encode);
+					System.out.println(" ok.");
+
+				} catch (IOException e) {
+					System.out.println(" fail.");
+				} finally {
+				}
+
 			}
 		}
 

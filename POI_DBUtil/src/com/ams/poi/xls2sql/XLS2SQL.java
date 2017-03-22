@@ -15,6 +15,9 @@ import com.ams.poi.xls2sql.util.StaticFileUtil;
  * Mroonga無効化モード (AWSなど)
  * TableAllList.xls ./sql mysql UTF8 UTF8 utf8mb4 utf8 MROONGA_DISABLE
  *
+ * Mroonga無効化 & id指定による連番出力モード (InsertAll内の $id を 指定idの連番(例は 1〜33)でInsert_all.を出力する)
+ * TableAllList.xls ./sql mysql UTF8 UTF8 utf8mb4 utf8 MROONGA_DISABLE 1 33
+ *
  * </p>
  * <p>Created on 2003/07/25</p>
  * @author 門田明彦
@@ -30,6 +33,8 @@ public class XLS2SQL {
 		String output_sql_encode = "EUC";
 		String output_java_encode = "MS932";
 		String output_jsp_encode = "Windows-31J";
+		Integer ids_from = -1;
+		Integer ids_to = 0;
 
 		String set_char_set = ""; // MySQL only
 
@@ -51,6 +56,14 @@ public class XLS2SQL {
 
 		if (args.length >= 7) {
 			output_jsp_encode = args[6];
+		}
+
+		if (args.length >= 9) {
+			ids_from = Integer.parseInt(args[8]);
+		}
+		
+		if (args.length >= 10) {
+			ids_to = Integer.parseInt(args[9]);
 		}
 
 		// set param to env
@@ -98,7 +111,7 @@ public class XLS2SQL {
 			imgr = new GenerateInsertSQLManager(xls_file, out_dir);
 			imgr.setOption("set_char_set", set_char_set);
 			num2 = imgr.generateInsertSQL(dbms, output_sql_encode,
-					output_java_encode);
+					output_java_encode, ids_from, ids_to);
 		} catch (FileNotFoundException e) {
 			System.err.println("ファイル:" + xls_file + " の読み取りエラー\n"
 					+ e.getMessage());
@@ -316,7 +329,7 @@ public class XLS2SQL {
    *
    */
   public static void printUsage() {
-    System.out.println("[usage]\njava -jar xls2sql.jar tableDef.xls outDir dbms(oracle|mysql|db2|sqlite3) outputSQLEncode outputJavaEncode [mysql charset] [outputJspEncode]");
-    System.out.println("[example]\njava -jar xls2sql.jar tableDef.xls C:\\tmp mysql EUC MS932 utf8 Windows-31J");
+    System.out.println("[usage]\njava -jar xls2sql.jar tableDef.xls outDir dbms(oracle|mysql|db2|sqlite3) outputSQLEncode outputJavaEncode [mysql charset] [outputJspEncode] [MROONGA_DISABLE] [id_from] [id_to]");
+    System.out.println("[example]\njava -jar xls2sql.jar tableDef.xls C:\\tmp mysql EUC MS932 utf8 Windows-31J  MROONGA_DISABLE 1 33");
 	}
 }
