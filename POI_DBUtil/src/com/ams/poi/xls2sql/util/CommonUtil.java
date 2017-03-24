@@ -6,3 +6,7 @@ public class CommonUtil {
 		return System.getProperty("ONLY_SQL_FILE") != null;
 	}
 }
+
+
+
+
