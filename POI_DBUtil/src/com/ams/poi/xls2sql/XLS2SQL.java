@@ -59,11 +59,11 @@ public class XLS2SQL {
 		}
 
 		if (args.length >= 9) {
-			ids_from = Integer.parseInt(args[8]);
+			if(CommonUtil.isInt(args[8])) ids_from = Integer.parseInt(args[8]);
 		}
-		
+
 		if (args.length >= 10) {
-			ids_to = Integer.parseInt(args[9]);
+			if(CommonUtil.isInt(args[9])) ids_to = Integer.parseInt(args[9]);
 		}
 
 		// set param to env
