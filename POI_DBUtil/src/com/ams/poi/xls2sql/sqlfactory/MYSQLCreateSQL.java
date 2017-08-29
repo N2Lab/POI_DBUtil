@@ -111,11 +111,11 @@ public class MYSQLCreateSQL implements CreateSQL {
 			}
 			// table character set   ex)			, CHARACTER SET utf8mb4
 			if (td.getCharacterSetName() != null && td.getCharacterSetName().length() > 0) {
-			    out.append(cm + " CHARACTER SET " + td.getCharacterSetName());
+			    out.append(cm + " CHARACTER SET " + td.getCharacterSetName().trim());
 			}
 			// row format set   ex)			, ROW_FORMAT=DYNAMIC
 			if (td.getRowFormatName() != null && td.getRowFormatName().length() > 0) {
-			    out.append(cm + " ROW_FORMAT=" + td.getRowFormatName());
+			    out.append(cm + " ROW_FORMAT=" + td.getRowFormatName().trim());
 			}
 			out.append(";\n\n");
 		}

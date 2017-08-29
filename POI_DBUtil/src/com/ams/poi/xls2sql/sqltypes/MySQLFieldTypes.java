@@ -35,6 +35,7 @@ public class MySQLFieldTypes {
 		type_map.put("Number", "INTEGER");
 		type_map.put("int", "INTEGER");
 		type_map.put("Int", "INTEGER");
+		type_map.put("INT", "INT");
 		type_map.put("CHAR", "CHAR");
 		type_map.put("Char", "CHAR");
 		type_map.put("char", "CHAR");
