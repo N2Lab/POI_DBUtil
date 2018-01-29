@@ -3,8 +3,6 @@ package com.ams.poi.xls2sql.jerseymaker;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
 import com.ams.poi.xls2sql.bean.FieldDef;
 import com.ams.poi.xls2sql.bean.TableDef;
 import com.ams.poi.xls2sql.util.NameUtil;
