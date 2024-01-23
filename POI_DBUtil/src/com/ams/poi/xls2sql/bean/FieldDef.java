@@ -41,7 +41,7 @@ public class FieldDef {
 
 	/** 単一フィールドINDEX名 */
 	private String indexName = "";
-  
+
   /** インデックス length */
   private int indexLength;
 
@@ -71,7 +71,19 @@ public class FieldDef {
 	public String getFieldNamePhysics() {
 		return fieldNamePhysics;
 	}
-	
+
+	/**
+	 * getFieldNamePhysics With Backquote<BR>
+	 * @return
+	 */
+	public String getFieldNamePhysicsBq() {
+		 if (fieldNamePhysics.contains("`")) {
+			 return fieldNamePhysics;
+		 } else {
+			 return "`" + fieldNamePhysics + "`";
+		 }
+	}
+
 	/**
 	 * JDO用フィールド名(camel)を返す
 	 * @return
@@ -103,7 +115,7 @@ public class FieldDef {
 	public String getTypeXls() {
 		return typeXls;
 	}
-	
+
 	public String getTypeJava() {
 		return JavaFieldTypes.getTypeByXLS(typeXls);
 	}
@@ -131,7 +143,7 @@ public class FieldDef {
 	public void setFieldNamePhysics(String string) {
 		// sqlite3 の場合, "id" は "_id" とする
 		DbmsType dbms = DbmsType.valueOf(System.getProperty("dbms"));
-		
+
 		if (dbms == DbmsType.SQLITE3 && "id".equalsIgnoreCase(string)) {
 			string = "_id";
 		}
@@ -230,7 +242,7 @@ public class FieldDef {
 	 * @return
 	 */
 	public String getFieldNamePhysicsTopUpper() {
-		
+
 		return NameUtil.toTopUpper(fieldNamePhysics);
 	}
 

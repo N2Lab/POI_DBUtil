@@ -10,7 +10,7 @@ import com.ams.poi.xls2sql.bean.TableDef;
 
 /**
  * @author Akihiko Monden
- * 
+ *
  */
 public class ParseUtil {
 
@@ -87,7 +87,7 @@ public class ParseUtil {
 					td.setCharacterSetName(row.getCell(character_set_col)
 							.getStringCellValue());
 				}
-				
+
 				table_row_top = (short) i;
 				break;
 			}
@@ -140,6 +140,7 @@ public class ParseUtil {
 				break;
 
 			case HSSFCell.CELL_TYPE_NUMERIC:
+
 				double def_num = row.getCell(default_val).getNumericCellValue();
 				fd.setDefaultValue(Double.toString(def_num));
 

@@ -40,7 +40,7 @@ public class MYSQLCreateSQL implements CreateSQL {
 		int max_field = getMaxFieldLen(td);
 
 		// CreateTable
-		out.append("CREATE TABLE " + td.getTableNamePhysics() + " (\n");
+		out.append("CREATE TABLE " + td.getTableNamePhysicsBq() + " (\n");
 
 		// CreateField
 		Iterator it = td.getFieldList().iterator();
@@ -48,7 +48,7 @@ public class MYSQLCreateSQL implements CreateSQL {
 			FieldDef fd = (FieldDef) it.next();
 
 			// field name
-			out.append(" " + fd.getFieldNamePhysics());
+			out.append(" " + fd.getFieldNamePhysicsBq());
 			out.append(
 				StringUtils.repeat(
 					" ",
@@ -64,10 +64,15 @@ public class MYSQLCreateSQL implements CreateSQL {
 			if (!(fd.getDefaultValue() == null
 				|| fd.getDefaultValue().equals(""))) {
 				// NUMBER(整数)の場合は整数値に変換
-				if (type.startsWith("NUMBER")) {
-					if (type.indexOf(",") != -1) {
-						// 小数指定有り .. デフォルトのまま
-					} else {
+				if (!defval.equals("NULL")) {
+					if (type.startsWith("NUMBER")) {
+						if (type.indexOf(",") != -1) {
+							// 小数指定有り .. デフォルトのまま
+						} else {
+							// 整数指定 .. int 扱い
+							defval = "" + (int)Double.parseDouble(defval);
+						}
+					} else if (type.endsWith("INT")) {
 						// 整数指定 .. int 扱い
 						defval = "" + (int)Double.parseDouble(defval);
 					}
@@ -94,7 +99,7 @@ public class MYSQLCreateSQL implements CreateSQL {
 				FieldDef fd = (FieldDef)itf.next();
 				if (fd.isPrimaryKey()) {
 					out.append(fdc++ > 0 ? "," : "");
-					out.append(fd.getFieldNamePhysics());
+					out.append(fd.getFieldNamePhysicsBq());
 				}
 			}
 			out.append(") ) ");
@@ -106,16 +111,18 @@ public class MYSQLCreateSQL implements CreateSQL {
 	      			engine = "InnoDB";
 	      		}
 
-			    out.append(" ENGINE = " + engine.trim());
-			    cm = ",";
+			    out.append(" ENGINE=" + engine.trim());
+			    cm = " DEFAULT";
 			}
 			// table character set   ex)			, CHARACTER SET utf8mb4
 			if (td.getCharacterSetName() != null && td.getCharacterSetName().length() > 0) {
-			    out.append(cm + " CHARACTER SET " + td.getCharacterSetName().trim());
+			    out.append(cm + " CHARACTER=" + td.getCharacterSetName().trim());
+			    cm = "";
 			}
 			// row format set   ex)			, ROW_FORMAT=DYNAMIC
 			if (td.getRowFormatName() != null && td.getRowFormatName().length() > 0) {
 			    out.append(cm + " ROW_FORMAT=" + td.getRowFormatName().trim());
+			    cm = "";
 			}
 			out.append(";\n\n");
 		}
@@ -129,13 +136,13 @@ public class MYSQLCreateSQL implements CreateSQL {
 	public String getOutputFileString(TableDef td, boolean dropSql)
 		throws TableDefParseException {
 			StringBuffer out = new StringBuffer("");
-			String pkey_name = INDEX_PREFIX_DEF + td.getTableNamePhysics();
+			String pkey_name = INDEX_PREFIX_DEF + td.getTableNamePhysicsBq();
 //			int max_field = getMaxFieldLen(td);
 
       if (dropSql) {
   			// DropTable
   			if (td.isDropTableEnable()) {
-                out.append("DROP TABLE IF EXISTS " + td.getTableNamePhysics() + ";\n");
+                out.append("DROP TABLE IF EXISTS " + td.getTableNamePhysicsBq() + ";\n");
   			}
 
   			// DropIndex
@@ -197,7 +204,7 @@ public class MYSQLCreateSQL implements CreateSQL {
       		}
 
 			buf.append("CREATE " + unique +  " INDEX " +
-				index + " ON " + td.getTableNamePhysics() + " (\n\t");
+				index + " ON " + td.getTableNamePhysicsBq() + " (\n\t");
 
 			// 対応するフィールドを探して追加
 			int c = 0;
@@ -208,7 +215,7 @@ public class MYSQLCreateSQL implements CreateSQL {
 					if (c++ > 0) {
 						buf.append(",");
 					}
-					buf.append(fd.getFieldNamePhysics());
+					buf.append(fd.getFieldNamePhysicsBq());
 
           if (fd.getIndexLength() > 0) {
             buf.append("(" + fd.getIndexLength() + ")");

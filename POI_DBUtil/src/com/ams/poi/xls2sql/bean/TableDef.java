@@ -17,22 +17,22 @@ public class TableDef {
 
 	/** テーブル名 (論理名) */
 	private String tableNameLogic = "";
-	
+
 	/** テーブル名（物理名）*/
 	private String tableNamePhysics = "";
-	
+
 	/** フィールドリスト */
 	private ArrayList<FieldDef> fieldList = new ArrayList<FieldDef>();
-	
+
 	/** DROP TABLE 記述有無フラグ */
 	private boolean dropTableEnable = false;
-	
+
 	/** DROP INDEX 記述有無フラグ */
 	private boolean dropIndexEnable = false;
-	
+
 	/** 備考 */
 	private String note = "";
-	
+
 	/** ストレージエンジン名, MySQL で利用 */
 	private String strageEngineName;
 
@@ -81,15 +81,24 @@ public class TableDef {
 	public String getTableNamePhysics() {
 		return tableNamePhysics;
 	}
+
+	/**
+	 * getTableNamePhysics with Backquote<BR>
+	 * @return
+	 */
+	public String getTableNamePhysicsBq() {
+		return "`" + tableNamePhysics + "`";
+	}
+
 	/**
 	 * getTableNamePhysics<BR>
 	 * @return
 	 */
 	public String getTableNamePhysicsTopUpper() {
-		
+
 		return NameUtil.toTopUpper(tableNamePhysics);
 	}
-	
+
 	/**
 	 * JDOクラス名を返却
 	 * @return
@@ -170,7 +179,7 @@ public class TableDef {
 	/**
 	 * PKのカラムを返す.複数の場合は未考慮
 	 * @param td
-	 * @return PKのカラム. 
+	 * @return PKのカラム.
 	 */
 	public FieldDef getId() {
 		for (FieldDef fd : this.fieldList) {
@@ -187,15 +196,15 @@ public class TableDef {
 	 * @return
 	 */
 	public String getCharacterSetName() {
-		
+
 		if (System.getProperty("MYSQL_UTF8MB4_DISABLE") != null && "utf8mb4".equals(this.characterSetName)) {
 			// MB4 が無効 かつ utf8mb4 指定の場合は utf8 にする
 			return "utf8";
 		}
-		
+
 		return characterSetName;
 	}
-	
+
 	/**
 	 * テーブルのキャラクタセットを設定
 	 * @param name
