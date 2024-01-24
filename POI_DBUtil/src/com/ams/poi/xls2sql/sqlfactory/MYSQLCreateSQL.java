@@ -72,7 +72,7 @@ public class MYSQLCreateSQL implements CreateSQL {
 							// ®”Žw’è .. int ˆµ‚¢
 							defval = "" + (int)Double.parseDouble(defval);
 						}
-					} else if (type.endsWith("INT")) {
+					} else if (type.endsWith("INT") || type.equals("INTEGER")) {
 						// ®”Žw’è .. int ˆµ‚¢
 						defval = "" + (int)Double.parseDouble(defval);
 					}
@@ -116,7 +116,7 @@ public class MYSQLCreateSQL implements CreateSQL {
 			}
 			// table character set   ex)			, CHARACTER SET utf8mb4
 			if (td.getCharacterSetName() != null && td.getCharacterSetName().length() > 0) {
-			    out.append(cm + " CHARACTER=" + td.getCharacterSetName().trim());
+			    out.append(cm + " CHARSET=" + td.getCharacterSetName().trim());
 			    cm = "";
 			}
 			// row format set   ex)			, ROW_FORMAT=DYNAMIC
